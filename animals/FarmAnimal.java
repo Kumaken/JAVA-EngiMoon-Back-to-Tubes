@@ -21,13 +21,13 @@ abstract class FarmAnimal {
     abstract public void eat(); //makan bila lapar
 
     public FarmProduct produceMeat(){
-        return FarmProduct();
+        return new FarmProduct();
     }
     public FarmProduct produceEgg(){
-        return FarmProduct();
+        return new FarmProduct();
     }
     public FarmProduct produceMilk(){
-        return FarmProduct();
+        return new FarmProduct();
     }
 
     //Getter setter

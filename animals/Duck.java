@@ -68,11 +68,11 @@ class Duck extends FarmAnimal implements EggProducing, MeatProducing{
     
     @Override
     public FarmProduct produceEgg(){
-        return DuckEgg();
+        return new DuckEgg();
     }
     
     @Override
     public FarmProduct produceMeat(){
-        return DuckMeat();
+        return new DuckMeat();
     }
 }

@@ -67,6 +67,6 @@ class Horse extends FarmAnimal implements MeatProducing{
     
     @Override
     public FarmProduct produceMeat(){
-        return HorseMeat();
+        return new HorseMeat();
     }
 }

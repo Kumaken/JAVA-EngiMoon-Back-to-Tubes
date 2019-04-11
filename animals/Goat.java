@@ -68,11 +68,11 @@ class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
     
     @Override
     public FarmProduct produceMeat(){
-        return GoatMeat();
+        return new GoatMeat();
     }
     
     @Override
     public FarmProduct produceMilk(){
-        return GoatMilk();
+        return new GoatMilk();
     }
 }

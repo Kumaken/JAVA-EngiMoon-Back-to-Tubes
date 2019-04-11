@@ -67,6 +67,6 @@ class Pig extends FarmAnimal implements MeatProducing{
     
     @Override
     public FarmProduct produceMeat(){
-        return PigMeat();
+        return new PigMeat();
     }
 }

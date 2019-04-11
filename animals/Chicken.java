@@ -69,11 +69,11 @@ class Chicken extends FarmAnimal implements EggProducing, MeatProducing{
     
     @Override
     public FarmProduct produceEgg(){
-        return ChickenEgg();
+        return new ChickenEgg();
     }
     
     @Override
     public FarmProduct produceMeat(){
-        return ChickenMeat();
+        return new ChickenMeat();
     }
 }

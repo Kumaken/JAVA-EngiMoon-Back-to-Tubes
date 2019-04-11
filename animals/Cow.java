@@ -68,11 +68,11 @@ class Cow extends FarmAnimal implements MilkProducing, MeatProducing{
     
     @Override
     public FarmProduct produceMeat(){
-        return CowMeat();
+        return new CowMeat();
     }
     
     @Override
     public FarmProduct produceMilk(){
-        return CowMilk();
+        return new CowMilk();
     }
 }
