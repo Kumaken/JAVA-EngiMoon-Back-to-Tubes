@@ -1,5 +1,7 @@
 package animals;
 
+import product.FarmProduct;
+
 abstract class FarmAnimal {
     protected char simbol; //menyatakan representasi objek dari kelas ini di map
     protected int threshold; //menyatakan waktu 'lapar'nya objek dari class ini

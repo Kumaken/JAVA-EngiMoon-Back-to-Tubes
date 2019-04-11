@@ -2,6 +2,10 @@ package animals;
 
 import java.util.*;
 
+import product.FarmProduct;
+import product.farmproduct.ChickenEgg;
+import product.farmproduct.ChickenMeat;
+
 class Chicken extends FarmAnimal implements EggProducing, MeatProducing{
     public Chicken(int x, int y, boolean l){
         super(x,y,l);
@@ -18,7 +22,7 @@ class Chicken extends FarmAnimal implements EggProducing, MeatProducing{
             if (arr.get(x)==1){
                 row = getX();
                 setX(row+1);
-                if (getX()>=gamemap.size() || gamemap[getX()][getY()]->getOverrideSymbol()!='\0' || (gamemap[getX()][getY()]->showSymbol()!='o' && gamemap[getX()][getY()]->showSymbol()!='*')){
+                if (getX()>=gamemap.size() || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='o' && gamemap[getX()][getY()].showSymbol()!='*')){
                     setX(row);
                 }
                 else break;
@@ -26,7 +30,7 @@ class Chicken extends FarmAnimal implements EggProducing, MeatProducing{
             else if (arr.get(x)==2){
                 col = getY();
                 setY(col+1);
-                if (getY()>=gamemap[0].size() || gamemap[getX()][getY()]->getOverrideSymbol()!='\0' || (gamemap[getX()][getY()]->showSymbol()!='o' && gamemap[getX()][getY()]->showSymbol()!='*')){
+                if (getY()>=gamemap[0].size() || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='o' && gamemap[getX()][getY()].showSymbol()!='*')){
                     setY(col);
                 }
                 else break;
@@ -34,7 +38,7 @@ class Chicken extends FarmAnimal implements EggProducing, MeatProducing{
             else if (arr.get(x)==3){
                 row = getX();
                 setX(row-1);
-                if (getX()<0 || gamemap[getX()][getY()]->getOverrideSymbol()!='\0' || (gamemap[getX()][getY()]->showSymbol()!='o' && gamemap[getX()][getY()]->showSymbol()!='*')){
+                if (getX()<0 || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='o' && gamemap[getX()][getY()].showSymbol()!='*')){
                     setX(row);
                 }
                 else break;
@@ -42,7 +46,7 @@ class Chicken extends FarmAnimal implements EggProducing, MeatProducing{
             else if (arr.get(x)==4){
                 col = getY();
                 setY(col-1);
-                if (getY()<0 || gamemap[getX()][getY()]->getOverrideSymbol()!='\0' || (gamemap[getX()][getY()]->showSymbol()!='o' && gamemap[getX()][getY()]->showSymbol()!='*')){
+                if (getY()<0 || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='o' && gamemap[getX()][getY()].showSymbol()!='*')){
                     setY(col);
                 }
                 else break;
@@ -52,8 +56,8 @@ class Chicken extends FarmAnimal implements EggProducing, MeatProducing{
     
     public void eat(){
         if (threshold<=0 && !lapar) revLapar();
-        if (lapar && gamemap[getX()][getY()]->showSymbol()=='*'){
-            gamemap[getX()][getY()]->ungrowGrass();
+        if (lapar && gamemap[getX()][getY()].showSymbol()=='*'){
+            gamemap[getX()][getY()].ungrowGrass();
             revLapar();
             threshold = 8;
         }
