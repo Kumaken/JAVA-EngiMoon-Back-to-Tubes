@@ -1,4 +1,5 @@
 import java.util.*; //for map, vector, linkedlist, list, etc;
+import product.*;
 
 class Player{
     private static final int MAX_WATER = 100;
@@ -171,7 +172,7 @@ class Player{
 
             cell.getFacilityPtr().invalidateFacility();
             Iterator<Product> itrB = backpack.iterator();
-            List<String> tempBag = new List<String>();
+            List<String> tempBag = new ArrayList<String>();
 
             while (itrB.hasNext()){
                 tempBag.add(itrB.next().getProductName());
@@ -241,7 +242,7 @@ class Player{
     }
 
     public boolean canPass(int trow, int tcol){
-        char overrideSymbol = gamemap[trow][tcol.getOverrideSymbol();
+        char overrideSymbol = gamemap[trow][tcol].getOverrideSymbol();
         char baseSymbol = Character.toUpperCase(gamemap[trow][tcol].showSymbol());
         return (overrideSymbol == '\0' && 
                 baseSymbol != 'M' && 
