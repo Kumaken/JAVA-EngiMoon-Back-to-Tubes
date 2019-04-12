@@ -1,7 +1,5 @@
 package animals;
 
-import product.FarmProduct;
-
 abstract class FarmAnimal {
     protected char simbol; //menyatakan representasi objek dari kelas ini di map
     protected int threshold; //menyatakan waktu 'lapar'nya objek dari class ini
@@ -19,16 +17,6 @@ abstract class FarmAnimal {
     abstract public void move(); //bergerak secara acak sebesar 1 satuan ke kiri, kanan, atas, maupun bawah
     abstract public String sound(); //method pure virtual, mengeluarkan suara
     abstract public void eat(); //makan bila lapar
-
-    public FarmProduct produceMeat(){
-        return new FarmProduct();
-    }
-    public FarmProduct produceEgg(){
-        return new FarmProduct();
-    }
-    public FarmProduct produceMilk(){
-        return new FarmProduct();
-    }
 
     //Getter setter
     public char showSimbol(){

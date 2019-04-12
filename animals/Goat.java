@@ -37,7 +37,7 @@ class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
             else if (arr.get(x)==3){
                 row = getX();
                 setX(row-1);
-                if (getX()<0 || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='.' && gamemap[getX()][getY()]->showSymbol()!='#')){
+                if (getX()<0 || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='.' && gamemap[getX()][getY()].showSymbol()!='#')){
                     setX(row);
                 }
                 else break;
@@ -45,7 +45,7 @@ class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
             else if (arr.get(x)==4){
                 col = getY();
                 setY(col-1);
-                if (getY()<0 || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='.' && gamemap[getX()][getY()]->showSymbol()!='#')){
+                if (getY()<0 || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='.' && gamemap[getX()][getY()].showSymbol()!='#')){
                     setY(col);
                 }
                 else break;
