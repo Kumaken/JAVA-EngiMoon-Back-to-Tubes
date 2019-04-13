@@ -56,7 +56,7 @@ class Cow extends FarmAnimal implements MilkProducing, MeatProducing{
     public void eat(){
         if (threshold<=0 && !lapar) revLapar();
         if (lapar && gamemap[getX()][getY()].showSymbol()=='#'){
-            gamemap[getX()][getY().ungrowGrass();
+            gamemap[getX()][getY().ungrowGrass()];
             revLapar();
             threshold = 10;
         }

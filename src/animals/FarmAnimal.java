@@ -1,6 +1,6 @@
-package animals;
+package engimoonclass.animals;
 
-abstract class FarmAnimal {
+public abstract class FarmAnimal {
     protected char simbol; //menyatakan representasi objek dari kelas ini di map
     protected int threshold; //menyatakan waktu 'lapar'nya objek dari class ini
     protected boolean lapar; //menyatakan status lapar
