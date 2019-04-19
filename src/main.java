@@ -35,8 +35,8 @@ public class Main{
                 }else{
                     System.out.print(tempCol.getOverrideSymbol()+" | ");
                 }
-                System.out.println();
             }
+            System.out.println();
         }
 
         for(int i = 0; i < colMax * 4 + 1; i++){
@@ -114,12 +114,248 @@ public class Main{
         System.out.println("Keterangan:                  Controls:");
     }
 
+    public static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+    }
+
     public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
         int tick = 0;
+        system(CLEAR);
+
+        System.out.println(" _____            _ _      ______                   ");
+        System.out.println("|  ___|          (_| )     |  ___|                  ");
+        System.out.println("| |__ _ __   __ _ _|/ ___  | |_ __ _ _ __ _ __ ___  ");
+        System.out.println("|  __| '_ \\ / _` | | / __| |  _/ _` | '__| '_ ` _ \\ ");
+        System.out.println("| |__| | | | (_| | | \\__ \\ | || (_| | |  | | | | | |");
+        System.out.println("\\____/_| |_|\\__, |_| |___/ \\_| \\__,_|_|  |_| |_| |_|");
+        System.out.println("             __/ |                                  ");
+        System.out.println("            |___/                                   ");
+        System.out.println("When in game, type exit to quit the game");
+        System.out.print("Press enter to start");
+        scanner.nextLine();
+        String command = "";
+    
         Common com = new Common();
         Player mainPlayer = new Player(5,5);
 
-        (Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol())).playerOccupy();
-        printMap(0,0,0);
+        Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
+        
+        //clearscreen()
+
+        //Bagian Spawn Animal secara random
+        //Spawn 3 Chickens
+        Random rand = new Random();
+        for(int i = 0; i < 3; i++){
+            int x = 0;
+            int y = 0;
+            //srand(time(0));
+            //Loop until correct position is found
+            do{
+                x = (rand.nextInt() % (Common.gamemap.size()));
+                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
+            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            FarmAnimal a = new Chicken(x, y, false);
+            //add animal into list of animal
+            Common.animalList.push_back(a);
+            //update gamemap
+            gamemap.get(x).get(y).animalOccupy(a);
+        }
+    
+        //Spawn 4 Ducks
+        for(int i = 0; i < 4; i++){
+            int x = 0;
+            int y = 0;
+            //srand(time(0));
+            //Loop until correct position is found
+            do{
+                x = (rand.nextInt() % (Common.gamemap.size()));
+                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
+            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            FarmAnimal a = new Duck(x, y, false);
+            //add animal into list of animal
+            Common.animalList.push_back(a);
+            //update gamemap
+            gamemap.get(x).get(y).animalOccupy(a);
+        }
+    
+        //Spawn 8 Cows
+        for(int i = 0; i < 8; i++){
+            int x = 0;
+            int y = 0;
+            //srand(time(0));
+            //Loop until correct position is found
+            do{
+                x = (rand.nextInt() % (Common.gamemap.size()));
+                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
+            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            FarmAnimal a = new Cow(x, y, false);
+            //add animal into list of animal
+            Common.animalList.push_back(a);
+            //update gamemap
+            gamemap.get(x).get(y).animalOccupy(a);
+        }
+    
+        //Spawn 7 Goats
+        for(int i = 0; i < 7; i++){
+            int x = 0;
+            int y = 0;
+            //srand(time(0));
+            //Loop until correct position is found
+            do{
+                x = (rand.nextInt() % (Common.gamemap.size()));
+                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
+            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            FarmAnimal a = new Goat(x, y, false);
+            //add animal into list of animal
+            Common.animalList.push_back(a);
+            //update gamemap
+            gamemap.get(x).get(y).animalOccupy(a);
+        }
+
+        //Spawn 5 Pigs
+        for(int i = 0; i < 5; i++){
+            int x = 0;
+            int y = 0;
+            //srand(time(0));
+            //Loop until correct position is found
+            do{
+                x = (rand.nextInt() % (Common.gamemap.size()));
+                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
+            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            FarmAnimal a = new Pig(x, y, false);
+            //add animal into list of animal
+            Common.animalList.push_back(a);
+            //update gamemap
+            gamemap.get(x).get(y).animalOccupy(a);
+        }
+
+        //Spawn 4 Horses
+        for(int i = 0; i < 4; i++){
+            int x = 0;
+            int y = 0;
+            //srand(time(0));
+            //Loop until correct position is found
+            do{
+                x = (rand.nextInt() % (Common.gamemap.size()));
+                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
+            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            FarmAnimal a = new Horse(x, y, false);
+            //add animal into list of animal
+            Common.animalList.push_back(a);
+            //update gamemap
+            gamemap.get(x).get(y).animalOccupy(a);
+        }
+
+
+        ByteArrayOutputStream baos;
+        PrintStream ps = new PrintStream(baos);
+        // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        
+
+
+        while(command != "exit" && animalList.size() > 0){
+            // print 'local' content
+            //clearscreen()
+      
+            //Move all animal every 2 ticks
+            if(tick != 0 && tick % 2 == 0){
+                moveAllAnimals();
+            }
+            //Erase dead animal and eat if hungry
+            for(int i = 0; i < animalList.size(); i++){
+                gamemap.get(animalList.get(i).getX()).get(animalList.get(i).getY()).makeUnoccupied();
+                animalList.get(i).eat();
+                gamemap.get(animalList.get(i).getX()).get(animalList.get(i).getY()).animalOccupy(animalList.get(i));
+                if(animalList.get(i).getThreshold() <= -5){
+                    gamemap.get(animalList.get(i).getX()).get(animalList.get(i).getY()).makeUnoccupied();
+                    //animalList.erase(animalList.begin() + i);
+                    animalList.remove(i);
+                }
+            }
+            
+            //Update all facilities:
+            com.updateAllFacilities();
+
+            //print the map
+            printMap(mainPlayer.getScore(), mainPlayer.getPouch(), tick);
+            //print the legend
+            printLegend();
+            //if all animal is dead, break from loop and game over
+            if(animalList.size() == 0){
+              break;
+            }
+
+            System.out.println();
+            System.out.print("Inventory: ");
+            mainPlayer.printBackpack();
+            System.out.println();
+
+            System.out.println("OUTPUT: ");
+            if (baos != null){
+                System.out.println(baos.toString());
+            }
+            baos = new ByteArrayOutputStream();
+
+            System.out.print("Command: ");
+            command = changeCase.toLowerCase(scanner.nextLine());
+            //lowercase the command input
+            System.out.println();
+
+            System.setOut(ps);
+            if(command == "talk"){ //talk action
+                c = scanner.next(); //direction to talk to
+                mainPlayer.Talk(c);
+            } else if(command == "interact"){ //interact action
+                c = scanner.next(); //direction to interact to
+                mainPlayer.Interact(c);
+            } else if(command == "kill"){ //kill action
+                c = scanner.next(); //direction to kill animal
+                mainPlayer.Kill(c);
+            } else if(command == "grow"){ //grow action
+                mainPlayer.Grow();
+            } else if(command == "mix"){ //mix action
+                c = scanner.next();
+                string menu;
+                menu = scanner.next();
+                mainPlayer.Mix(c,menu);
+            } else if(command == "w" || command == "a" || command == "s" || command == "d"){ //move action
+                gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
+                mainPlayer.setPosition(command.charAt(0));
+                gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
+            } else if(command == "cheats"){
+                int x,y;
+                y = scanner.nextInt();
+                x = scanner.nextInt();
+                gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
+                System.out.println("cheats ");
+                mainPlayer.setX(x);
+                mainPlayer.setY(y);
+                gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
+            } else if(command == "exit"){
+            } else{
+                tick--;
+                System.out.println("Invalid command");
+            }
+
+
+
+            tick++;
+            //Decrement hunger threshold for all animal
+            for(int i = 0; i < animalList.size(); i++){
+                animalList.get(i).minThreshold();
+            }
+
+            // Put things back
+            System.out.flush();
+            System.setOut(old);
+        }
+
+        // printMap(0,0,0);
+        System.out.println("                 GAME OVER");
+        System.out.println("---------------------------------------------");
+        System.out.println("Final score: " + mainPlayer.getScore());
     }
 }
