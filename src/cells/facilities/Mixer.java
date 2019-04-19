@@ -1,7 +1,7 @@
-package facilitytypes;
+package cells.facilities;
 import cells.Cell;
 //Mixer Class: A facility for mixing and creating various side-products for profit
-public class Mixer extends Cell implements Facility{    
+public class Mixer extends Cell implements Facility{
     //Constructor implementation:
     public Mixer(){
         this.Symbol = 'M';

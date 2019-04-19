@@ -1,4 +1,6 @@
-package engimoonclass.animals;
+package animals;
+
+import product.FarmProduct;
 
 public abstract class FarmAnimal {
     protected char simbol; //menyatakan representasi objek dari kelas ini di map
@@ -17,6 +19,9 @@ public abstract class FarmAnimal {
     abstract public void move(); //bergerak secara acak sebesar 1 satuan ke kiri, kanan, atas, maupun bawah
     abstract public String sound(); //method pure virtual, mengeluarkan suara
     abstract public void eat(); //makan bila lapar
+    abstract public FarmProduct produceMeat();
+    abstract public FarmProduct produceEgg();
+    abstract public FarmProduct produceMilk();
 
     //Getter setter
     public char showSimbol(){

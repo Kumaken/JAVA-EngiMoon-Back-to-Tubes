@@ -4,8 +4,9 @@ import java.util.*;
 import product.FarmProduct;
 import product.farmproduct.GoatMilk;
 import product.farmproduct.GoatMeat;
+import common.Common;
 
-class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
+public class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
     public Goat(int x, int y, boolean l){
         super(x,y,l);
         if (lapar) simbol = 'g';
@@ -21,7 +22,7 @@ class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
             if (arr.get(x)==1){
                 row = getX();
                 setX(row+1);
-                if (getX()>=gamemap.size() || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='.' && gamemap[getX()][getY()].showSymbol()!='#')){
+                if (getX()>=Common.gamemap.size() || Common.gamemap.get(getX()).get(getY()).getOverrideSymbol()!='\0' || (Common.gamemap.get(getX()).get(getY()).showSymbol()!='.' && Common.gamemap.get(getX()).get(getY()).showSymbol()!='#')){
                     setX(row);
                 }
                 else break;
@@ -29,7 +30,7 @@ class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
             else if (arr.get(x)==2){
                 col = getY();
                 setY(col+1);
-                if (getY()>=gamemap[0].size() || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='.' && gamemap[getX()][getY()].showSymbol()!='#')){
+                if (getY()>=Common.gamemap.get(0).size() || Common.gamemap.get(getX()).get(getY()).getOverrideSymbol()!='\0' || (Common.gamemap.get(getX()).get(getY()).showSymbol()!='.' && Common.gamemap.get(getX()).get(getY()).showSymbol()!='#')){
                     setY(col);
                 }
                 else break;
@@ -37,7 +38,7 @@ class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
             else if (arr.get(x)==3){
                 row = getX();
                 setX(row-1);
-                if (getX()<0 || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='.' && gamemap[getX()][getY()].showSymbol()!='#')){
+                if (getX()<0 || Common.gamemap.get(getX()).get(getY()).getOverrideSymbol()!='\0' || (Common.gamemap.get(getX()).get(getY()).showSymbol()!='.' && Common.gamemap.get(getX()).get(getY()).showSymbol()!='#')){
                     setX(row);
                 }
                 else break;
@@ -45,7 +46,7 @@ class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
             else if (arr.get(x)==4){
                 col = getY();
                 setY(col-1);
-                if (getY()<0 || gamemap[getX()][getY()].getOverrideSymbol()!='\0' || (gamemap[getX()][getY()].showSymbol()!='.' && gamemap[getX()][getY()].showSymbol()!='#')){
+                if (getY()<0 || Common.gamemap.get(getX()).get(getY()).getOverrideSymbol()!='\0' || (Common.gamemap.get(getX()).get(getY()).showSymbol()!='.' && Common.gamemap.get(getX()).get(getY()).showSymbol()!='#')){
                     setY(col);
                 }
                 else break;
@@ -55,8 +56,8 @@ class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
     
     public void eat(){
         if (threshold<=0 && !lapar) revLapar();
-        if (lapar && gamemap[getX()][getY()].showSymbol()=='#'){
-            gamemap[getX()][getY()].ungrowGrass();
+        if (lapar && Common.gamemap.get(getX()).get(getY()).showSymbol()=='#'){
+            Common.gamemap.get(getX()).get(getY()).ungrowGrass();
             revLapar();
             threshold = 10;
         }
@@ -69,6 +70,11 @@ class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
     @Override
     public FarmProduct produceMeat(){
         return new GoatMeat();
+    }
+
+    @Override
+    public FarmProduct produceEgg(){
+        return new FarmProduct();
     }
     
     @Override

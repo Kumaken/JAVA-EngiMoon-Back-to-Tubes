@@ -1,3 +1,4 @@
+package cells.facilities;
 import cells.Cell;
 
 //Well Class: A facility that supplies water for player's farm

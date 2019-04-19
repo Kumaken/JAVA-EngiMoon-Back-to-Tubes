@@ -1,12 +1,12 @@
-package engimoonclass.cells.facilities;
+package cells.facilities;
 //Facility Interface
 
-public abstract class Facility{
+public interface Facility{
         // invalidateTruck:
-        public abstract void invalidateFacility();
+        public void invalidateFacility();
 
         // updateFacility:
-        public abstract void facilityUpdate();
+        public void facilityUpdate();
 };
 
 

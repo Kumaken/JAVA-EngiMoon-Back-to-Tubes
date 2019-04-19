@@ -1,5 +1,11 @@
 import java.util.*; //for map, vector, linkedlist, list, etc;
 import product.*;
+import cells.*;
+import animals.*;
+import product.sideproduct.BaconOmelette;
+import product.sideproduct.HorseRolade;
+import product.sideproduct.MixedCheese;
+import common.Common;
 
 class Player{
     private static final int MAX_WATER = 100;
@@ -42,10 +48,10 @@ class Player{
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
 
-        if (tcol < 0 || tcol >= gamemap[0].size() || trow < 0 || trow >= gamemap.size()) return;
+        if (tcol < 0 || tcol >= Common.gamemap.get(0).size() || trow < 0 || trow >= Common.gamemap.size()) return;
 
         if (cell.getOverrideSymbol() != '\0'){ //animal
-            System.out.println(cell.getAnimalPtr().sound());
+            System.out.println(cell.getAnimalRef().sound());
         }else{
             System.out.println("There's no animal..");
         }
@@ -59,7 +65,7 @@ class Player{
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
 
-        if (tcol < 0 || tcol >= gamemap[0].size() || trow < 0 || trow >= gamemap.size()) return;
+        if (tcol < 0 || tcol >= Common.gamemap.get(0).size() || trow < 0 || trow >= Common.gamemap.size()) return;
 
         int idxFacility = ARRAYFACILITY.indexOf(Character.toUpperCase(cell.showSymbol()));
 
@@ -69,15 +75,15 @@ class Player{
     
             if (Character.isUpperCase(cell.getOverrideSymbol())){
                 if (idxMilkProducing != -1){
-                    backpack.add(cell.getAnimalPtr().produceMilk());
+                    backpack.add(cell.getAnimalRef().produceMilk());
                 }
                 if (idxEggProducing != -1){
-                    backpack.add(cell.getAnimalPtr().produceEgg());
+                    backpack.add(cell.getAnimalRef().produceEgg());
     
                 }
                 if (idxMilkProducing != -1 || idxEggProducing != -1){
-                    cell.getAnimalPtr().revLapar();
-                    cell.animalOccupy(cell.getAnimalPtr());
+                    cell.getAnimalRef().revLapar();
+                    cell.animalOccupy(cell.getAnimalRef());
                     System.out.println("Product is produced");
                 }
     
@@ -95,7 +101,7 @@ class Player{
                 }
                 pouch = MAX_WATER;
                 System.out.println("Water's filled");
-                cell.getFacilityPtr().invalidateFacility();
+                cell.getFacilityRef().invalidateFacility();
 
             }else if (c == 'T' || c == 't'){ //Truck
                 if (cell.showSymbol()=='t'){
@@ -127,11 +133,11 @@ class Player{
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
 
-        if (tcol < 0 || tcol >= gamemap[0].size() || trow < 0 || trow >= gamemap.size()) return;
+        if (tcol < 0 || tcol >= Common.gamemap.get(0).size() || trow < 0 || trow >= Common.gamemap.size()) return;
 
         if (cell.getOverrideSymbol() != '\0'){
-            backpack.add(cell.getAnimalPtr().produceMeat());
-            System.out.println(cell.getAnimalPtr().sound());
+            backpack.add(cell.getAnimalRef().produceMeat());
+            System.out.println(cell.getAnimalRef().sound());
             cell.makeUnoccupied();
             System.out.println("Animal's killed");
     
@@ -144,7 +150,7 @@ class Player{
 
     public void grow(){ //on the spot
         if (pouch>0){
-            gamemap[row][col].growGrass();
+            Common.gamemap.get(row).get(col).growGrass();
             System.out.println("Grass grown");
             pouch--;
         }else{
@@ -158,7 +164,7 @@ class Player{
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
         
-        if (tcol < 0 || tcol >= gamemap[0].size() || trow < 0 || trow >= gamemap.size()) return;
+        if (tcol < 0 || tcol >= Common.gamemap.get(0).size() || trow < 0 || trow >= Common.gamemap.size()) return;
 
         if (cell.showSymbol() != 'M'){
             System.out.println("Mixing's failed");
@@ -170,7 +176,7 @@ class Player{
                 return;
             }
 
-            cell.getFacilityPtr().invalidateFacility();
+            cell.getFacilityRef().invalidateFacility();
             Iterator<Product> itrB = backpack.iterator();
             List<String> tempBag = new ArrayList<String>();
 
@@ -220,8 +226,8 @@ class Player{
 
     public List<Object> getPositionInteract(char dir){ // return Cell, rowt, colt
         dir = Character.toLowerCase(dir);
-        int colt, rowt; //position of the cell that will be interacted
-        int maxRow = gamemap.size(), maxCol = gamemap[0].size();
+        int colt = 0, rowt = 0; //position of the cell that will be interacted
+        int maxRow = Common.gamemap.size(), maxCol = Common.gamemap.get(0).size();
 
         if (dir == 'w'){
             colt = col; rowt = row-1;
@@ -234,16 +240,16 @@ class Player{
         }
 
         if (0<=rowt && rowt<maxRow && 0<=colt && colt<maxCol){
-            return Arrays.asList(gamemap[rowt][colt], rowt, colt); 
+            return Arrays.asList(Common.gamemap.get(rowt).get(colt), rowt, colt);
         }else{
             System.out.println("Cell is out of range");
-            return new Cell();
+            return Arrays.asList(new Cell(), rowt, colt);
         }
     }
 
     public boolean canPass(int trow, int tcol){
-        char overrideSymbol = gamemap[trow][tcol].getOverrideSymbol();
-        char baseSymbol = Character.toUpperCase(gamemap[trow][tcol].showSymbol());
+        char overrideSymbol = Common.gamemap.get(trow).get(tcol).getOverrideSymbol();
+        char baseSymbol = Character.toUpperCase(Common.gamemap.get(trow).get(tcol).showSymbol());
         return (overrideSymbol == '\0' && 
                 baseSymbol != 'M' && 
                 baseSymbol != 'T' && 
@@ -256,10 +262,10 @@ class Player{
         if (dir == 'w' && 0<=row-1 && canPass(row-1,col)){
             row--;
         }
-        else if (dir == 'd' && col+1<gamemap[0].size() && canPass(row,col+1)){
+        else if (dir == 'd' && col+1<Common.gamemap.get(0).size() && canPass(row,col+1)){
             col++;
         }
-        else if (dir == 's' && row+1<gamemap.size() && canPass(row+1,col)){
+        else if (dir == 's' && row+1<Common.gamemap.size() && canPass(row+1,col)){
             row++;
         }
         else if (dir == 'a' && 0<=col-1 && canPass(row,col-1)){
