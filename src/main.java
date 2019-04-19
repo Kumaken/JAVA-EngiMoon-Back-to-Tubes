@@ -307,20 +307,20 @@ public class Main{
             System.setOut(ps);
             if(command == "talk"){ //talk action
                 c = scanner.next(); //direction to talk to
-                mainPlayer.Talk(c);
+                mainPlayer.talk(c);
             } else if(command == "interact"){ //interact action
                 c = scanner.next(); //direction to interact to
-                mainPlayer.Interact(c);
+                mainPlayer.interact(c);
             } else if(command == "kill"){ //kill action
                 c = scanner.next(); //direction to kill animal
-                mainPlayer.Kill(c);
+                mainPlayer.kill(c);
             } else if(command == "grow"){ //grow action
-                mainPlayer.Grow();
+                mainPlayer.grow();
             } else if(command == "mix"){ //mix action
                 c = scanner.next();
                 string menu;
                 menu = scanner.next();
-                mainPlayer.Mix(c,menu);
+                mainPlayer.mix(c,menu);
             } else if(command == "w" || command == "a" || command == "s" || command == "d"){ //move action
                 gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
                 mainPlayer.setPosition(command.charAt(0));
@@ -331,8 +331,8 @@ public class Main{
                 x = scanner.nextInt();
                 gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
                 System.out.println("cheats ");
-                mainPlayer.setX(x);
-                mainPlayer.setY(y);
+                mainPlayer.setCol(x);
+                mainPlayer.setRow(y);
                 gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
             } else if(command == "exit"){
             } else{
