@@ -18,6 +18,18 @@ public class Common{
     public static ArrayList<FarmAnimal> animalList;
     public static ArrayList<Facility> facilityList;
 
+    public static ArrayList<ArrayList<Cell>> getGamemap() {
+        return gamemap;
+    }
+
+    public static ArrayList<FarmAnimal> getAnimalList() {
+        return animalList;
+    }
+
+    public static ArrayList<Facility> getFacilityList() {
+        return facilityList;
+    }
+
     public Common(){
         gamemap = new ArrayList<ArrayList<Cell>>();
         animalList = new ArrayList<FarmAnimal>();
@@ -68,18 +80,17 @@ public class Common{
             File f = new File(filename);
             Scanner read = new Scanner(f);
             String line = "";
-            ArrayList<Cell> tempv = new ArrayList<Cell>();
             while(read.hasNextLine()){
+                ArrayList<Cell> tempv = new ArrayList<Cell>();
                 line = read.nextLine();
                 for(int i = 0; i < line.length(); i++){
                     classIdentifier(line.charAt(i), tempv);
                 }
                 gamemap.add(tempv);
-                tempv.clear();
             }
             read.close();
         } catch(Exception e){
-            System.out.println("File read error");
+            System.out.println(e);
             System.exit(0);
         }
     }
