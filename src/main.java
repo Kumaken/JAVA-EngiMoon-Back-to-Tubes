@@ -123,6 +123,7 @@ public class Main{
 //            }
 //            System.out.println();
 //        }
+        //test
         for(int i = 0; i < Common.getGamemap().size(); i++){
             for(int j = 0; j < Common.getGamemap().get(0).size(); j++){
                 System.out.print(Common.getGamemap().get(i).get(j).showSymbol());
