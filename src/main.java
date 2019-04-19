@@ -9,30 +9,108 @@ import common.*;
 import java.util.*;
 
 public class main{
-    public void classIdentifier(char c, List<Cell> v){
-        if(c == '.'){
-            v.add(new Grassland());
-        } else if(c == '#'){
-            Grassland temp = new Grassland();
-            temp.growGrass();
-            v.add(temp);
-        } else if(c == '@'){
-            Barn temp = new Barn();
-            temp.growGrass();
-            v.add(temp);
-        } else if(c == '*'){
-            Coop temp = new Coop();
-            temp.growGrass();
-            v.add(temp);
-        } else if(c == 'o'){
-            v.add(new Coop());
-        } else if(c == 'x'){
-            v.add(new Barn());
-        } else if(c == 'T'){
-            Truck temp = new Truck();
-            v.add(temp);
-            Common.facilityList.add(temp);
+    public static void printMap(int money, int aqua, int tick){
+        Iterator< Vector<Cell> > row = common.gamemap.iterator();
+        Iterator<Cell> col = row.iterator();
 
+        int colMax = common.gamemap[0].size();
+        for (int i = 0; i<colMax*4-15;i++){
+            if (i == (colMax*4+1)/2){
+                System.out.print("PETA ENGI'S FARM");
+            } else{
+                System.out.print(" ");
+            }
         }
+        System.out.println();
+
+        for(int i = 0; i < colMax * 4 + 1; i++){
+            System.out.print("_");
+        }
+      
+        System.out.println();
+
+        while (row.hasNext()){
+            System.out.print("|");
+            row.next();
+            while (col.hasNext()){
+                Iterator<Cell> tempCol = col.next();
+                if (col.getOverrideSymbol() == '\0'){
+                    System.out.print(col.showSymbol()+" | ");
+                }else{
+                    System.out.print(col.getOverrideSymbol()+" | ");
+                }
+                System.out.println();
+            }
+        }
+
+        for(int i = 0; i < colMax * 4 + 1; i++){
+            if(i % 4 == 0){
+                System.out.print("|");
+            } else{
+                System.out.print("-");
+            }
+        }
+        System.out.println();
+
+        int moneySpaces = Integer.toString(money).length();
+
+        for(int i = 0; i < colMax * 4; i++){
+            if(i == 0){
+                System.out.print("| Money: "+money);
+            } else if(i >= 9 + moneySpaces){
+                System.out.print(" ");
+            }
+        }
+        System.out.println("|");
+
+        for(int i = 0; i < colMax * 4 + 1; i++){
+            if(i == 0 || i == colMax * 4){
+                System.out.print("|");
+            } else{
+                System.out.print("_");
+            }
+        }
+        System.out.println();
+
+        //jumlah digit yang ada di pouch
+        int waterSpaces = Integer.toString(aqua).length();
+
+        for(int i = 0; i < colMax * 4; i++){
+            if(i == 0){
+                System.out.print("| Water: " + aqua);
+            } else if(i >= 9 + waterSpaces){
+                System.out.print(" ");
+            }
+        }
+        System.out.println("|");
+
+        for(int i = 0; i < colMax * 4 + 1; i++){
+            if(i == 0 || i == colMax * 4){
+                System.out.print("|");
+            } else{
+                System.out.print("_");
+            }
+        }
+        System.out.println();
+        
+        //jumlah digit yang ada di timer
+        int timerSpaces = Integer.toString(tick).length();
+        for(int i = 0; i < colMax * 4; i++){
+            if(i == 0){
+                System.out.print("| Timer: " + tick);
+            } else if(i >= 9 + timerSpaces){
+                System.out.print(" ");
+            }
+        }
+        System.out.println("|");
+
+        for(int i = 0; i < colMax * 4 + 1; i++){
+            if(i == 0 || i == colMax * 4){
+                System.out.print("|");
+            } else{
+                System.out.print("_");
+            }
+        }
+        System.out.println();
     }
 }
