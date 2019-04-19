@@ -95,6 +95,8 @@ public class Common{
         }
     }
 
+//    public void setInMap()
+
     public void moveAllAnimals(){
         for(int i = 0; i < animalList.size(); i++){
             gamemap.get(animalList.get(i).getX()).get(animalList.get(i).getY()).makeUnoccupied();

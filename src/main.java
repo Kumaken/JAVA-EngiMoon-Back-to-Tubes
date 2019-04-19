@@ -117,19 +117,9 @@ public class Main{
     public static void main(String[] args){
         int tick = 0;
         Common com = new Common();
-//        for(ArrayList<Cell> innerList : com.getGamemap()) {
-//            for (Cell b : innerList) {
-//                System.out.print(b.showSymbol());
-//            }
-//            System.out.println();
-//        }
-        //test
-        for(int i = 0; i < Common.getGamemap().size(); i++){
-            for(int j = 0; j < Common.getGamemap().get(0).size(); j++){
-                System.out.print(Common.getGamemap().get(i).get(j).showSymbol());
-            }
-            System.out.println();
-        }
-//        printMap(0,0,0);
+        Player mainPlayer = new Player(5,5);
+
+        (Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol())).playerOccupy();
+        printMap(0,0,0);
     }
 }
