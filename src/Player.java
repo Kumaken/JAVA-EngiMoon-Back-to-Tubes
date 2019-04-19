@@ -1,4 +1,4 @@
-import java.util.*; //for map, vector, linkedlist, list, etc;
+import java.util.*; //for map, ArrayList, linkedlist, list, etc;
 import product.*;
 import cells.*;
 import animals.*;
@@ -10,13 +10,13 @@ import common.Common;
 class Player{
     private static final int MAX_WATER = 100;
 
-    private final Vector<Character> EGGPRODUCINGANIMAL = new Vector<Character>(Arrays.asList(new Character[]{'C','D'}));
-    private final Vector<Character> MILKPRODUCINGANIMAL = new Vector<Character>(Arrays.asList(new Character[]{'S','G'}));
-    private final Vector<Character> ARRAYFACILITY = new Vector<Character>(Arrays.asList(new Character[]{'W','T','M'}));
-    private final Map<String, Vector<String>> RECIPE = new HashMap<String, Vector<String>>() {{
-        put("BaconOmelette", new Vector<String>(Arrays.asList("PigMeat","ChickenEgg")));
-        put("HorseRolade", new Vector<String>(Arrays.asList("HorseMeat", "DuckEgg")));
-        put("MixedCheese", new Vector<String>(Arrays.asList("CowMilk", "GoatMilk")));
+    private final ArrayList<Character> EGGPRODUCINGANIMAL = new ArrayList<Character>(Arrays.asList(new Character[]{'C','D'}));
+    private final ArrayList<Character> MILKPRODUCINGANIMAL = new ArrayList<Character>(Arrays.asList(new Character[]{'S','G'}));
+    private final ArrayList<Character> ARRAYFACILITY = new ArrayList<Character>(Arrays.asList(new Character[]{'W','T','M'}));
+    private final Map<String, ArrayList<String>> RECIPE = new HashMap<String, ArrayList<String>>() {{
+        put("BaconOmelette", new ArrayList<String>(Arrays.asList("PigMeat","ChickenEgg")));
+        put("HorseRolade", new ArrayList<String>(Arrays.asList("HorseMeat", "DuckEgg")));
+        put("MixedCheese", new ArrayList<String>(Arrays.asList("CowMilk", "GoatMilk")));
     }};
 
     private int row,col,score,pouch;
@@ -43,7 +43,7 @@ class Player{
     public void setScore(int _score){ pouch = _score; }
 
     public void talk(char dir){
-        List<Object> list = getPositionInteract(dir);
+        ArrayList<Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
@@ -60,7 +60,7 @@ class Player{
     }
 
     public void interact(char dir){
-        List<Object> list = getPositionInteract(dir);
+        ArrayList<Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
@@ -128,7 +128,7 @@ class Player{
     }
 
     public void kill(char dir){
-        List<Object> list = getPositionInteract(dir);
+        ArrayList<Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
@@ -141,7 +141,7 @@ class Player{
             cell.makeUnoccupied();
             System.out.println("Animal's killed");
     
-            //vector<FarmAnimal*>::const_iterator itr = find(animalList.begin(), animalList.end(),cell.getAnimalPtr());
+            //ArrayList<FarmAnimal*>::const_iterator itr = find(animalList.begin(), animalList.end(),cell.getAnimalPtr());
             //if (itr!=animalList.end()) animalList.erase(itr);
         } else{
             System.out.println("There's no animal..");
@@ -159,7 +159,7 @@ class Player{
     }
 
     public void mix(char dir, String menu){
-        List<Object> list = getPositionInteract(dir);
+        ArrayList<Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
@@ -170,7 +170,7 @@ class Player{
             System.out.println("Mixing's failed");
             return;
         }else if (cell.showSymbol() == 'M'){
-            Vector<String> ingredients = RECIPE.get(menu);
+            ArrayList<String> ingredients = RECIPE.get(menu);
             if (ingredients==null){
                 System.out.println("Menu's not available..");
                 return;
@@ -178,7 +178,7 @@ class Player{
 
             cell.getFacilityRef().invalidateFacility();
             Iterator<Product> itrB = backpack.iterator();
-            List<String> tempBag = new ArrayList<String>();
+            ArrayList<String> tempBag = new ArrayList<String>();
 
             while (itrB.hasNext()){
                 tempBag.add(itrB.next().getProductName());
@@ -224,7 +224,7 @@ class Player{
 
     }
 
-    public List<Object> getPositionInteract(char dir){ // return Cell, rowt, colt
+    public ArrayList<Object> getPositionInteract(char dir){ // return Cell, rowt, colt
         dir = Character.toLowerCase(dir);
         int colt = 0, rowt = 0; //position of the cell that will be interacted
         int maxRow = Common.gamemap.size(), maxCol = Common.gamemap.get(0).size();
@@ -240,10 +240,10 @@ class Player{
         }
 
         if (0<=rowt && rowt<maxRow && 0<=colt && colt<maxCol){
-            return Arrays.asList(Common.gamemap.get(rowt).get(colt), rowt, colt);
+            return new ArrayList(Arrays.asList(Common.gamemap.get(rowt).get(colt), rowt, colt));
         }else{
             System.out.println("Cell is out of range");
-            return Arrays.asList(new Cell(), rowt, colt);
+            return new ArrayList(Arrays.asList(new Cell(), rowt, colt));
         }
     }
 

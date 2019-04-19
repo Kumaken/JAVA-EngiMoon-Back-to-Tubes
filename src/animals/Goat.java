@@ -16,7 +16,7 @@ public class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
     
     public void move(){
         int row, col;
-        List<Integer> arr = Arrays.asList(1,2,3,4);
+        ArrayList<Integer> arr = new ArrayList<Integer>(Arrays.asList(1,2,3,4));
         Collections.shuffle(arr, new Random());
         for (int x=0; x<4; x++){
             if (arr.get(x)==1){
