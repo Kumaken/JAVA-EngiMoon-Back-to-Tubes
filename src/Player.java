@@ -6,6 +6,7 @@ import product.sideproduct.HorseRolade;
 import product.sideproduct.MixedCheese;
 import common.Common;
 
+@SuppressWarnings("unchecked")
 class Player{
     private static final int MAX_WATER = 100;
 
