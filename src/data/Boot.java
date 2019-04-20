@@ -60,6 +60,7 @@ public class Boot {
         font = new TrueTypeFont(awtFont, false);
 
         String[] inventory_content;
+        int pass = 0;
 
         //GUI loop
         while(!Display.isCloseRequested()){ //while not prompted to close
@@ -73,7 +74,17 @@ public class Boot {
             font.drawString(110, 850, "5. " + inventory_content[4]);
             font.drawString(110, 880, "6. " + inventory_content[5]);
             font.drawString(500, 700, "OUTPUT:");
-            font.drawString(500, 730, outContent.toString());
+
+            if(outContent.toString().contains("Animal's killed")){
+                String[] str_piece = outContent.toString().split("A", 2);
+                font.drawString(500, 730, "It cries: " + str_piece[0]);
+                font.drawString(500, 760, "A" + str_piece[1]);
+            } else if(Common.animalList.size() == 0){
+                font.drawString(500, 730, "Game Over");
+                font.drawString(500, 760, "Final Score: " + mainPlayer.getScore());
+            } else{
+                font.drawString(500, 730, outContent.toString());
+            }
             font.drawString(1000, 700, "TICK     =  " + tick);
             font.drawString(1000, 750, "MONEY    =  " + mainPlayer.getScore());
             font.drawString(1000, 800, "WATER    =  " + mainPlayer.getPouch());
@@ -82,51 +93,51 @@ public class Boot {
                 setUpStreams();
                 //MIX KEY:
                 if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-                    mainPlayer.mix('a', "MixedCheese");
-                    updateMap();
-                }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-                    mainPlayer.mix('a', "HorseRolade");
-                    updateMap();
-                }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-                    mainPlayer.mix('a', "BaconOmelette");
-                    updateMap();
-                }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-                    mainPlayer.mix('s', "MixedCheese");
-                    updateMap();
-                }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-                    mainPlayer.mix('s', "HorseRolade");
-                    updateMap();
-                }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-                    mainPlayer.mix('s', "BaconOmelette");
-                    updateMap();
-                }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-                    mainPlayer.mix('d', "MixedCheese");
-                    updateMap();
-                }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-                    mainPlayer.mix('d', "HorseRolade");
-                    updateMap();
-                }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-                    mainPlayer.mix('d', "BaconOmelette");
-                    updateMap();
-                }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
                     mainPlayer.mix('w', "MixedCheese");
                     updateMap();
                 }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
                     mainPlayer.mix('w', "HorseRolade");
                     updateMap();
                 }
-                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
                     mainPlayer.mix('w', "BaconOmelette");
+                    updateMap();
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+                    mainPlayer.mix('d', "MixedCheese");
+                    updateMap();
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+                    mainPlayer.mix('d', "HorseRolade");
+                    updateMap();
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+                    mainPlayer.mix('d', "BaconOmelette");
+                    updateMap();
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                    mainPlayer.mix('s', "MixedCheese");
+                    updateMap();
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                    mainPlayer.mix('s', "HorseRolade");
+                    updateMap();
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                    mainPlayer.mix('s', "BaconOmelette");
+                    updateMap();
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                    mainPlayer.mix('a', "MixedCheese");
+                    updateMap();
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                    mainPlayer.mix('a', "HorseRolade");
+                    updateMap();
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                    mainPlayer.mix('a', "BaconOmelette");
                     updateMap();
                 }
                 //INTERACT KEY:
@@ -214,9 +225,6 @@ public class Boot {
                     Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
                     updateMap();
                 }
-                if(Common.animalList.size() == 0){
-                    break;
-                }
 
                 restoreStreams();
 
@@ -233,8 +241,14 @@ public class Boot {
 
             Display.update();
             Display.sync(60);
+            if(Common.animalList.size() == 0){
+                pass++;
+                if(pass > 5){
+                    try{Thread.sleep(3000);}catch(InterruptedException e){break;}
+                    break;
+                }
             }
-
+        }
         Display.destroy();
     }
 
