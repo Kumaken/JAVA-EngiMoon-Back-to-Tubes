@@ -76,7 +76,7 @@ public class Common{
 
     public void loadMap(){
         try{
-            String filename = "mapschema.txt";
+            String filename = "..//mapschema.txt";
             File f = new File(filename);
             Scanner read = new Scanner(f);
             String line = "";

@@ -1,14 +1,14 @@
 import java.util.*; //for map, ArrayList, linkedlist, list, etc;
 import product.*;
 import cells.*;
-import animals.*;
 import product.sideproduct.BaconOmelette;
 import product.sideproduct.HorseRolade;
 import product.sideproduct.MixedCheese;
 import common.Common;
 
+@SuppressWarnings("unchecked")
 class Player{
-    private static final int MAX_WATER = 100;
+    private static final int MAX_WATER = 5;
 
     private final ArrayList<Character> EGGPRODUCINGANIMAL = new ArrayList<Character>(Arrays.asList(new Character[]{'C','D'}));
     private final ArrayList<Character> MILKPRODUCINGANIMAL = new ArrayList<Character>(Arrays.asList(new Character[]{'S','G'}));
@@ -40,7 +40,7 @@ class Player{
     public void setRow(int _row){ row = _row; }
     public void setCol(int _col){ col = _col; }
     public void setPouch(int _pouch){ pouch = _pouch; }
-    public void setScore(int _score){ pouch = _score; }
+    public void setScore(int _score){ score = _score; }
 
     public void talk(char dir){
         ArrayList<Object> list = getPositionInteract(dir);
@@ -202,11 +202,11 @@ class Player{
                         backpack.remove(deleteIdx[j]);
                     }
 
-                    if (menu=="BaconOmelette"){
+                    if (menu.equals("BaconOmelette")){
                         backpack.add(new BaconOmelette());
-                    } else if (menu == "HorseRolade"){
+                    } else if (menu.equals("HorseRolade")){
                         backpack.add(new HorseRolade());
-                    }else if (menu =="MixedCheese"){
+                    }else if (menu.equals("MixedCheese")){
                         backpack.add(new MixedCheese());
                     }else{
                         backpack.add(new Product());
