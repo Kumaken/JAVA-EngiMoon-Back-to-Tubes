@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Artist {
-    public static final int WIDTH = 1368, HEIGHT = 960;
+    public static final int WIDTH = 1366, HEIGHT = 960;
 
     public static void beginSession(){
             //setup screen:

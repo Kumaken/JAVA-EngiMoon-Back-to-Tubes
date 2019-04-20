@@ -3,7 +3,7 @@ package data;
 public enum TileType {
 
     GrassTile("grasstile", true), GrassGrown("grass", true),
-    BarnTile("barntile", true), CoopTile("cooptile", true),
+    BarnTile("dirt", true), CoopTile("cooptile", true),
     Dirt("dirt", true), DirtP("dirtP", true);
 
     String textureName;

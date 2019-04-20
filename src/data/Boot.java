@@ -28,41 +28,177 @@ public class Boot {
     public static TileGrid grid;
     public static Player mainPlayer = new Player(4,3);
 
-    public Boot() {
+    public Boot(Common com) {
+        int tick = 0;
         //call helpers: Artist to load screen:
         beginSession();
 
         //loadmap:
         grid = new TileGrid();
+        //drawmap:
+        grid.draw();
+        //handle objects:
+        grid.handleOccupiedTiles();
+        //draw objects:
+        for(int i =0; i<objectList.size(); ++i){
+            objectList.get(i).draw();
+        }
 
-        Scanner scanner = new Scanner(System.in);
-        String command = "";
         //GUI loop
-            while(!Display.isCloseRequested()){ //while not prompted to close
-                if(Keyboard.isKeyDown(Keyboard.KEY_W)){
-                    System.out.println("w");
-                    Common.gamemap.get(mainPlayer.getCol()).get(mainPlayer.getRow()).makeUnoccupied();
+        while(!Display.isCloseRequested()){ //while not prompted to close
+            if (Keyboard.next() && Keyboard.getEventKeyState()) {
+//                for(int i = 0; i < Common.animalList.size(); i++){
+//                    System.out.println("animal " + (i+1) + " pos: " + Common.animalList.get(i).getX() + " " + Common.animalList.get(i).getY());
+//                }
+//
+//                System.out.println("playerpos: " + mainPlayer.getRow() + " " + mainPlayer.getCol());
+
+                //MIX KEY:
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+                    mainPlayer.mix('a', "MixedCheese");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+                    mainPlayer.mix('a', "HorseRolade");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+                    mainPlayer.mix('a', "BaconOmelette");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+                    mainPlayer.mix('s', "MixedCheese");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+                    mainPlayer.mix('s', "HorseRolade");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+                    mainPlayer.mix('s', "BaconOmelette");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                    mainPlayer.mix('d', "MixedCheese");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                    mainPlayer.mix('d', "HorseRolade");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                    mainPlayer.mix('d', "BaconOmelette");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                    mainPlayer.mix('w', "MixedCheese");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_1) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                    mainPlayer.mix('w', "HorseRolade");
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_2) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                    mainPlayer.mix('w', "BaconOmelette");
+                }
+                //INTERACT KEY:
+                if(Keyboard.isKeyDown(Keyboard.KEY_I) && Keyboard.isKeyDown(Keyboard.KEY_UP) ){
+                    mainPlayer.interact('w');
+                }
+                if(Keyboard.isKeyDown(Keyboard.KEY_I) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT) ){
+                    mainPlayer.interact('d');
+                }
+                if(Keyboard.isKeyDown(Keyboard.KEY_I) && Keyboard.isKeyDown(Keyboard.KEY_DOWN) ){
+                    mainPlayer.interact('s');
+                }
+                if(Keyboard.isKeyDown(Keyboard.KEY_I) && Keyboard.isKeyDown(Keyboard.KEY_LEFT) ) {
+                    mainPlayer.interact('a');
+                }
+                //TALK KEY:
+                if (Keyboard.isKeyDown(Keyboard.KEY_T) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+                    mainPlayer.talk('w');
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_T) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+                    mainPlayer.talk('d');
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_T) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                    mainPlayer.talk('s');
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_T) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                    mainPlayer.talk('a');
+                }
+//                if (Keyboard.isKeyDown(Keyboard.KEY_U)) {
+//                    mainPlayer.talk('w');
+//                }
+//                if (Keyboard.isKeyDown(Keyboard.KEY_P)) {
+//                    mainPlayer.talk('d');
+//                }
+//                if (Keyboard.isKeyDown(Keyboard.KEY_O)) {
+//                    mainPlayer.talk('s');
+//                }
+//                if (Keyboard.isKeyDown(Keyboard.KEY_I)) {
+//                    mainPlayer.talk('a');
+//                }
+                //MURDER KEY:
+                if (Keyboard.isKeyDown(Keyboard.KEY_K) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+                    mainPlayer.kill('w');
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_K) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+                    mainPlayer.kill('d');
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_K) && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                    mainPlayer.kill('s');
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_K) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                    mainPlayer.kill('a');
+                }
+                //GROW KEY:
+                if (Keyboard.isKeyDown(Keyboard.KEY_G)) {
+                    mainPlayer.grow();
+                }
+                //EXIT KEY:
+                if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+                    break;
+                }
+                if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+                    Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
                     mainPlayer.move('w');
-                    Common.gamemap.get(mainPlayer.getCol()).get(mainPlayer.getRow()).playerOccupy();
+                    Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
                 }
-                else if(Keyboard.isKeyDown(Keyboard.KEY_A)){
-                    System.out.println("a");
-                    Common.gamemap.get(mainPlayer.getCol()).get(mainPlayer.getRow()).makeUnoccupied();
+                if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+                    Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
                     mainPlayer.move('a');
-                    Common.gamemap.get(mainPlayer.getCol()).get(mainPlayer.getRow()).playerOccupy();
+                    Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
                 }
-                else if(Keyboard.isKeyDown(Keyboard.KEY_S)){
-                    System.out.println("s");
-                    Common.gamemap.get(mainPlayer.getCol()).get(mainPlayer.getRow()).makeUnoccupied();
+                if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+                    Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
                     mainPlayer.move('s');
-                    Common.gamemap.get(mainPlayer.getCol()).get(mainPlayer.getRow()).playerOccupy();
+                    Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
                 }
-                else if(Keyboard.isKeyDown(Keyboard.KEY_D)){
-                    System.out.println("d");
-                    Common.gamemap.get(mainPlayer.getCol()).get(mainPlayer.getRow()).makeUnoccupied();
+                if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
+                    Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
                     mainPlayer.move('d');
-                    Common.gamemap.get(mainPlayer.getCol()).get(mainPlayer.getRow()).playerOccupy();
+                    Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
                 }
+
+                tick++;
+
+                for(int i = 0; i < Common.animalList.size(); i++){
+                    Common.animalList.get(i).minThreshold();
+                }
+
+                //Move all animal every 2 ticks
+                if(tick != 0 && tick % 2 == 0){
+                    com.moveAllAnimals();
+                    tick = 0;
+                }
+
+                //Erase dead animal and eat if hungry
+                for(int i = 0; i < Common.animalList.size(); i++){
+                    Common.gamemap.get(Common.animalList.get(i).getX()).get(Common.animalList.get(i).getY()).makeUnoccupied();
+                    Common.animalList.get(i).eat();
+                    Common.gamemap.get(Common.animalList.get(i).getX()).get(Common.animalList.get(i).getY()).animalOccupy(Common.animalList.get(i));
+                    if(Common.animalList.get(i).getThreshold() <= -5){
+                        Common.gamemap.get(Common.animalList.get(i).getX()).get(Common.animalList.get(i).getY()).makeUnoccupied();
+                        //animalList.erase(animalList.begin() + i);
+                        Common.animalList.remove(i);
+                    }
+                }
+
+                //Update all facilities:
+                com.updateAllFacilities();
+
+                objectList.clear();
+
                 //loadmap:
                 grid = new TileGrid();
                 //drawmap:
@@ -73,126 +209,18 @@ public class Boot {
                 for(int i =0; i<objectList.size(); ++i){
                     objectList.get(i).draw();
                 }
-                Display.update();
-                Display.sync(60);
-                objectList.clear();
-                /*
-                //Ask for command
-                System.out.println("COMMAND:");
-                command = (scanner.nextLine().toLowerCase());
-                System.out.println(command);
-                //clear arraylist objects:
 
-                 */
-            }
-        //End the game:
-            Display.destroy();
-    }
-
-    //other methods:
-    public static void printMap(int money, int aqua, int tick){
-        Iterator<ArrayList<Cell>> row = Common.getGamemap().iterator();
-        Iterator<Cell> col;
-
-        int colMax = Common.getGamemap().get(0).size();
-        for (int i = 0; i<colMax*4-15;i++){
-            if (i == (colMax*4+1)/2){
-                System.out.print("PETA ENGI'S FARM");
-            } else{
-                System.out.print(" ");
-            }
-        }
-        System.out.println();
-
-        for(int i = 0; i < colMax * 4 + 1; i++){
-            System.out.print("_");
-        }
-
-        System.out.println();
-
-        while (row.hasNext()){
-            System.out.print("| ");
-            col=row.next().iterator();
-            while (col.hasNext()){
-                Cell tempCol = col.next();
-                if (tempCol.getOverrideSymbol() == '\0'){
-                    System.out.print(tempCol.showSymbol()+" | ");
-                }else {
-                    System.out.print(tempCol.getOverrideSymbol() + " | ");
+                if(Common.animalList.size() == 0){
+                    break;
                 }
+
             }
-            System.out.println();
-        }
 
-        for(int i = 0; i < colMax * 4 + 1; i++){
-            if(i % 4 == 0){
-                System.out.print("|");
-            } else{
-                System.out.print("-");
+            Display.update();
+            Display.sync(60);
             }
-        }
-        System.out.println();
 
-        int moneySpaces = Integer.toString(money).length();
-
-        for(int i = 0; i < colMax * 4; i++){
-            if(i == 0){
-                System.out.print("| Money: "+money);
-            } else if(i >= 9 + moneySpaces){
-                System.out.print(" ");
-            }
-        }
-        System.out.println("|");
-
-        for(int i = 0; i < colMax * 4 + 1; i++){
-            if(i == 0 || i == colMax * 4){
-                System.out.print("|");
-            } else{
-                System.out.print("_");
-            }
-        }
-        System.out.println();
-
-        //jumlah digit yang ada di pouch
-        int waterSpaces = Integer.toString(aqua).length();
-
-        for(int i = 0; i < colMax * 4; i++){
-            if(i == 0){
-                System.out.print("| Water: " + aqua);
-            } else if(i >= 9 + waterSpaces){
-                System.out.print(" ");
-            }
-        }
-        System.out.println("|");
-
-        for(int i = 0; i < colMax * 4 + 1; i++){
-            if(i == 0 || i == colMax * 4){
-                System.out.print("|");
-            } else{
-                System.out.print("_");
-            }
-        }
-        System.out.println();
-
-        //jumlah digit yang ada di timer
-        int timerSpaces = Integer.toString(tick).length();
-        for(int i = 0; i < colMax * 4; i++){
-            if(i == 0){
-                System.out.print("| Timer: " + tick);
-            } else if(i >= 9 + timerSpaces){
-                System.out.print(" ");
-            }
-        }
-        System.out.println("|");
-
-        for(int i = 0; i < colMax * 4 + 1; i++){
-            if(i == 0 || i == colMax * 4){
-                System.out.print("|");
-            } else{
-                System.out.print("_");
-            }
-        }
-        System.out.println();
+        Display.destroy();
     }
 
     public static void printLegend(){
@@ -219,26 +247,7 @@ public class Boot {
     }
 
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
-        int tick = 0;
-        //system(CLEAR);
-
-        System.out.println(" _____            _ _      ______                   ");
-        System.out.println("|  ___|          (_| )     |  ___|                  ");
-        System.out.println("| |__ _ __   __ _ _|/ ___  | |_ __ _ _ __ _ __ ___  ");
-        System.out.println("|  __| '_ \\ / _` | | / __| |  _/ _` | '__| '_ ` _ \\ ");
-        System.out.println("| |__| | | | (_| | | \\__ \\ | || (_| | |  | | | | | |");
-        System.out.println("\\____/_| |_|\\__, |_| |___/ \\_| \\__,_|_|  |_| |_| |_|");
-        System.out.println("             __/ |                                  ");
-        System.out.println("            |___/                                   ");
-        System.out.println("When in game, type exit to quit the game");
-        System.out.print("Press enter to start");
-        scanner.nextLine();
-        String command = "";
-
         Common com = new Common();
-
-
         Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
 
         //Bagian Spawn Animal secara random
@@ -247,7 +256,6 @@ public class Boot {
         for(int i = 0; i < 3; i++){
             int x = 0;
             int y = 0;
-            //srand(time(0));
             //Loop until correct position is found
             do{
                 x = rand.nextInt(Common.gamemap.size());
@@ -264,7 +272,6 @@ public class Boot {
         for(int i = 0; i < 4; i++){
             int x = 0;
             int y = 0;
-            //srand(time(0));
             //Loop until correct position is found
             do{
                 x = rand.nextInt(Common.gamemap.size());
@@ -281,7 +288,6 @@ public class Boot {
         for(int i = 0; i < 8; i++){
             int x = 0;
             int y = 0;
-            //srand(time(0));
             //Loop until correct position is found
             do{
                 x = rand.nextInt(Common.gamemap.size());
@@ -298,7 +304,6 @@ public class Boot {
         for(int i = 0; i < 7; i++){
             int x = 0;
             int y = 0;
-            //srand(time(0));
             //Loop until correct position is found
             do{
                 x = rand.nextInt(Common.gamemap.size());
@@ -315,7 +320,6 @@ public class Boot {
         for(int i = 0; i < 5; i++){
             int x = 0;
             int y = 0;
-            //srand(time(0));
             //Loop until correct position is found
             do{
                 x = rand.nextInt(Common.gamemap.size());
@@ -332,7 +336,6 @@ public class Boot {
         for(int i = 0; i < 4; i++){
             int x = 0;
             int y = 0;
-            //srand(time(0));
             //Loop until correct position is found
             do{
                 x = rand.nextInt(Common.gamemap.size());
@@ -461,6 +464,6 @@ public class Boot {
         */
 
         //boot the GUI:
-        new Boot();
+        new Boot(com);
     }
 }

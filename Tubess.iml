@@ -17,7 +17,6 @@
         <jarDirectory url="file://$MODULE_DIR$/lwjgl-2.9.3/jar" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="windows" level="project" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
@@ -28,5 +27,6 @@
         <jarDirectory url="file://$MODULE_DIR$/slick texture" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="windows" level="project" />
   </component>
 </module>
