@@ -26,17 +26,17 @@ public class Main{
         System.out.println();
 
         while (row.hasNext()){
-            System.out.print("|");
+            System.out.print("| ");
             col=row.next().iterator();
             while (col.hasNext()){
                 Cell tempCol = col.next();
                 if (tempCol.getOverrideSymbol() == '\0'){
                     System.out.print(tempCol.showSymbol()+" | ");
-                }else{
-                    System.out.print(tempCol.getOverrideSymbol()+" | ");
+                }else {
+                    System.out.print(tempCol.getOverrideSymbol() + " | ");
                 }
-                System.out.println();
             }
+            System.out.println();
         }
 
         for(int i = 0; i < colMax * 4 + 1; i++){
@@ -117,7 +117,7 @@ public class Main{
     public static void main(String[] args){
         int tick = 0;
         Common com = new Common();
-        Player mainPlayer = new Player(5,5);
+        Player mainPlayer = new Player(4,3);
 
         (Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol())).playerOccupy();
         printMap(0,0,0);
