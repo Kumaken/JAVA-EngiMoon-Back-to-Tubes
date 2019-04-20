@@ -3,8 +3,9 @@ import cells.*;
 import animals.*;
 import common.*;
 import java.util.*;
+import java.io.*;
 
-public class Main{
+public class main{
     public static void printMap(int money, int aqua, int tick){
         Iterator<ArrayList<Cell>> row = Common.getGamemap().iterator();
         Iterator<Cell> col;
@@ -122,7 +123,7 @@ public class Main{
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         int tick = 0;
-        system(CLEAR);
+        //system(CLEAR);
 
         System.out.println(" _____            _ _      ______                   ");
         System.out.println("|  ___|          (_| )     |  ___|                  ");
@@ -160,7 +161,7 @@ public class Main{
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
-            gamemap.get(x).get(y).animalOccupy(a);
+            Common.gamemap.get(x).get(y).animalOccupy(a);
         }
     
         //Spawn 4 Ducks
@@ -177,7 +178,7 @@ public class Main{
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
-            gamemap.get(x).get(y).animalOccupy(a);
+            Common.gamemap.get(x).get(y).animalOccupy(a);
         }
     
         //Spawn 8 Cows
@@ -194,7 +195,7 @@ public class Main{
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
-            gamemap.get(x).get(y).animalOccupy(a);
+            Common.gamemap.get(x).get(y).animalOccupy(a);
         }
     
         //Spawn 7 Goats
@@ -211,7 +212,7 @@ public class Main{
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
-            gamemap.get(x).get(y).animalOccupy(a);
+            Common.gamemap.get(x).get(y).animalOccupy(a);
         }
 
         //Spawn 5 Pigs
@@ -228,7 +229,7 @@ public class Main{
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
-            gamemap.get(x).get(y).animalOccupy(a);
+            Common.gamemap.get(x).get(y).animalOccupy(a);
         }
 
         //Spawn 4 Horses
@@ -245,34 +246,34 @@ public class Main{
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
-            gamemap.get(x).get(y).animalOccupy(a);
+            Common.gamemap.get(x).get(y).animalOccupy(a);
         }
 
 
-        ByteArrayOutputStream baos;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();;
         PrintStream ps = new PrintStream(baos);
         // IMPORTANT: Save the old System.out!
         PrintStream old = System.out;
         
 
 
-        while(command != "exit" && animalList.size() > 0){
+        while(command != "exit" && Common.animalList.size() > 0){
             // print 'local' content
             //clearscreen()
       
             //Move all animal every 2 ticks
             if(tick != 0 && tick % 2 == 0){
-                moveAllAnimals();
+                com.moveAllAnimals();
             }
             //Erase dead animal and eat if hungry
-            for(int i = 0; i < animalList.size(); i++){
-                gamemap.get(animalList.get(i).getX()).get(animalList.get(i).getY()).makeUnoccupied();
-                animalList.get(i).eat();
-                gamemap.get(animalList.get(i).getX()).get(animalList.get(i).getY()).animalOccupy(animalList.get(i));
-                if(animalList.get(i).getThreshold() <= -5){
-                    gamemap.get(animalList.get(i).getX()).get(animalList.get(i).getY()).makeUnoccupied();
+            for(int i = 0; i < Common.animalList.size(); i++){
+                Common.gamemap.get(Common.animalList.get(i).getX()).get(Common.animalList.get(i).getY()).makeUnoccupied();
+                Common.animalList.get(i).eat();
+                Common.gamemap.get(Common.animalList.get(i).getX()).get(Common.animalList.get(i).getY()).animalOccupy(Common.animalList.get(i));
+                if(Common.animalList.get(i).getThreshold() <= -5){
+                    Common.gamemap.get(Common.animalList.get(i).getX()).get(Common.animalList.get(i).getY()).makeUnoccupied();
                     //animalList.erase(animalList.begin() + i);
-                    animalList.remove(i);
+                    Common.animalList.remove(i);
                 }
             }
             
@@ -284,7 +285,7 @@ public class Main{
             //print the legend
             printLegend();
             //if all animal is dead, break from loop and game over
-            if(animalList.size() == 0){
+            if(Common.animalList.size() == 0){
               break;
             }
 
@@ -300,40 +301,41 @@ public class Main{
             baos = new ByteArrayOutputStream();
 
             System.out.print("Command: ");
-            command = changeCase.toLowerCase(scanner.nextLine());
+            command = (scanner.nextLine()).toLowerCase();
             //lowercase the command input
             System.out.println();
 
             System.setOut(ps);
+            String c;
             if(command == "talk"){ //talk action
                 c = scanner.next(); //direction to talk to
-                mainPlayer.talk(c);
+                mainPlayer.talk(c.charAt(0));
             } else if(command == "interact"){ //interact action
                 c = scanner.next(); //direction to interact to
-                mainPlayer.interact(c);
+                mainPlayer.interact(c.charAt(0));
             } else if(command == "kill"){ //kill action
                 c = scanner.next(); //direction to kill animal
-                mainPlayer.kill(c);
+                mainPlayer.kill(c.charAt(0));
             } else if(command == "grow"){ //grow action
                 mainPlayer.grow();
             } else if(command == "mix"){ //mix action
                 c = scanner.next();
-                string menu;
+                String menu;
                 menu = scanner.next();
-                mainPlayer.mix(c,menu);
+                mainPlayer.mix(c.charAt(0),menu);
             } else if(command == "w" || command == "a" || command == "s" || command == "d"){ //move action
-                gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
-                mainPlayer.setPosition(command.charAt(0));
-                gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
+                Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
+                mainPlayer.move(command.charAt(0));
+                Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
             } else if(command == "cheats"){
                 int x,y;
                 y = scanner.nextInt();
                 x = scanner.nextInt();
-                gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
+                Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
                 System.out.println("cheats ");
                 mainPlayer.setCol(x);
                 mainPlayer.setRow(y);
-                gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
+                Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
             } else if(command == "exit"){
             } else{
                 tick--;
@@ -344,8 +346,8 @@ public class Main{
 
             tick++;
             //Decrement hunger threshold for all animal
-            for(int i = 0; i < animalList.size(); i++){
-                animalList.get(i).minThreshold();
+            for(int i = 0; i < Common.animalList.size(); i++){
+                Common.animalList.get(i).minThreshold();
             }
 
             // Put things back

@@ -1,7 +1,6 @@
 import java.util.*; //for map, ArrayList, linkedlist, list, etc;
 import product.*;
 import cells.*;
-import animals.*;
 import product.sideproduct.BaconOmelette;
 import product.sideproduct.HorseRolade;
 import product.sideproduct.MixedCheese;
