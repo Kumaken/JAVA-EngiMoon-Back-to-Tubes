@@ -1,3 +1,5 @@
+package data;
+
 import java.util.*; //for map, ArrayList, linkedlist, list, etc;
 import product.*;
 import cells.*;
@@ -7,7 +9,7 @@ import product.sideproduct.MixedCheese;
 import common.Common;
 
 @SuppressWarnings("unchecked")
-class Player{
+public class Player{
     private static final int MAX_WATER = 10;
 
     private final ArrayList<Character> EGGPRODUCINGANIMAL = new ArrayList<Character>(Arrays.asList(new Character[]{'C','D'}));
@@ -43,7 +45,7 @@ class Player{
     public void setScore(int _score){ score = _score; }
 
     public void talk(char dir){
-        ArrayList<Object> list = getPositionInteract(dir);
+        ArrayList<java.lang.Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
@@ -60,7 +62,7 @@ class Player{
     }
 
     public void interact(char dir){
-        ArrayList<Object> list = getPositionInteract(dir);
+        ArrayList<java.lang.Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
@@ -130,7 +132,7 @@ class Player{
     }
 
     public void kill(char dir){
-        ArrayList<Object> list = getPositionInteract(dir);
+        ArrayList<java.lang.Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
@@ -159,7 +161,7 @@ class Player{
     }
 
     public void mix(char dir, String menu){
-        ArrayList<Object> list = getPositionInteract(dir);
+        ArrayList<java.lang.Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
         int trow = (Integer) list.get(1);
         int tcol = (Integer) list.get(2);
@@ -224,7 +226,7 @@ class Player{
 
     }
 
-    public ArrayList<Object> getPositionInteract(char dir){ // return Cell, rowt, colt
+    public ArrayList<java.lang.Object> getPositionInteract(char dir){ // return Cell, rowt, colt
         dir = Character.toLowerCase(dir);
         int colt = 0, rowt = 0; //position of the cell that will be interacted
         int maxRow = Common.gamemap.size(), maxCol = Common.gamemap.get(0).size();

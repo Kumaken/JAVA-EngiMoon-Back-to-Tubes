@@ -42,28 +42,30 @@ public class TileGrid {
     }
 
     public void handleOccupiedTiles() {
+        //handle player:
+        Boot.objectList.add(new Object(quickLoad("player"), Boot.grid.getTile(Boot.mainPlayer.getRow(), Boot.mainPlayer.getCol()), OBJECTWIDTH, OBJECTHEIGHT));
         for (int i = 0; i < Common.animalList.size(); i++) {
             //System.out.println("x: "+ Common.animalList.get(i).getX() +" | y: "+ Common.animalList.get(i).getY());
             if (Common.animalList.get(i).showSimbol() == 'C')
-                Boot.objectList.add(new Object(quickLoad("chicken"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
+                Boot.objectList.add(new Object(quickLoad("chicken"), Boot.grid.getTile(Common.animalList.get(i).getY(), Common.animalList.get(i).getX()), OBJECTWIDTH, OBJECTHEIGHT));
             if (Common.animalList.get(i).showSimbol() == 'c')
-                Boot.objectList.add(new Object(quickLoad("chicken off"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
+                Boot.objectList.add(new Object(quickLoad("chicken off"), Boot.grid.getTile(Common.animalList.get(i).getY(), Common.animalList.get(i).getX()), OBJECTWIDTH, OBJECTHEIGHT));
             else if (Common.animalList.get(i).showSimbol() == 'B')
-                Boot.objectList.add(new Object(quickLoad("pig"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
+                Boot.objectList.add(new Object(quickLoad("pig"), Boot.grid.getTile(Common.animalList.get(i).getY(), Common.animalList.get(i).getX()), OBJECTWIDTH, OBJECTHEIGHT));
             if (Common.animalList.get(i).showSimbol() == 'b')
-                Boot.objectList.add(new Object(quickLoad("pig off"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
+                Boot.objectList.add(new Object(quickLoad("pig off"), Boot.grid.getTile(Common.animalList.get(i).getY(), Common.animalList.get(i).getX()), OBJECTWIDTH, OBJECTHEIGHT));
             else if (Common.animalList.get(i).showSimbol() == 'S')
-                Boot.objectList.add(new Object(quickLoad("cow"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
+                Boot.objectList.add(new Object(quickLoad("cow"), Boot.grid.getTile(Common.animalList.get(i).getY(), Common.animalList.get(i).getX()), OBJECTWIDTH, OBJECTHEIGHT));
             if (Common.animalList.get(i).showSimbol() == 's')
-                Boot.objectList.add(new Object(quickLoad("cow off"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
+                Boot.objectList.add(new Object(quickLoad("cow off"), Boot.grid.getTile(Common.animalList.get(i).getY(), Common.animalList.get(i).getX()), OBJECTWIDTH, OBJECTHEIGHT));
             else if (Common.animalList.get(i).showSimbol() == 'H')
-                Boot.objectList.add(new Object(quickLoad("horse"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
+                Boot.objectList.add(new Object(quickLoad("horse"), Boot.grid.getTile(Common.animalList.get(i).getY(), Common.animalList.get(i).getX()), OBJECTWIDTH, OBJECTHEIGHT));
             if (Common.animalList.get(i).showSimbol() == 'h')
-                Boot.objectList.add(new Object(quickLoad("horse off"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
+                Boot.objectList.add(new Object(quickLoad("horse off"), Boot.grid.getTile(Common.animalList.get(i).getY(), Common.animalList.get(i).getX()), OBJECTWIDTH, OBJECTHEIGHT));
             else if (Common.animalList.get(i).showSimbol() == 'G')
-                Boot.objectList.add(new Object(quickLoad("goat"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
+                Boot.objectList.add(new Object(quickLoad("goat"), Boot.grid.getTile(Common.animalList.get(i).getY(), Common.animalList.get(i).getX()), OBJECTWIDTH, OBJECTHEIGHT));
             else if (Common.animalList.get(i).showSimbol() == 'g')
-                Boot.objectList.add(new Object(quickLoad("goat off"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
+                Boot.objectList.add(new Object(quickLoad("goat off"), Boot.grid.getTile(Common.animalList.get(i).getY(), Common.animalList.get(i).getX()), OBJECTWIDTH, OBJECTHEIGHT));
         }
 
         for (int i = 0; i < Common.facilityList.size(); i++) {

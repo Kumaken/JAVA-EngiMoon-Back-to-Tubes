@@ -1,4 +1,4 @@
-import product.*;
+import data.Player;
 import cells.*;
 import animals.*;
 import common.*;
@@ -122,7 +122,7 @@ public class Main{
         System.out.println("M : Mixer                    interact (dir)    : interact with things");
         System.out.println("T : Truck                    kill (dir)        : kill animal");
         System.out.println("W : Well                     grow (dir)        : grow grass");
-        System.out.println("P : Player                   mix (dir, recipe) : mix ingredients");
+        System.out.println("P : data.Player                   mix (dir, recipe) : mix ingredients");
         System.out.println("x : Barn                     exit              : exit the game");
         System.out.println("o : Coop");
         System.out.println(". : Grassland");
@@ -134,7 +134,7 @@ public class Main{
         System.out.flush();  
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int tick = 0;
         //system(CLEAR);
@@ -151,109 +151,109 @@ public class Main{
         System.out.print("Press enter to start");
         scanner.nextLine();
         String command = "";
-    
+
         Common com = new Common();
-        Player mainPlayer = new Player(4,3);
+        Player mainPlayer = new Player(4, 3);
 
         Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
 
         //Bagian Spawn Animal secara random
         //Spawn 3 Chickens
         Random rand = new Random();
-        for(int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             int x = 0;
             int y = 0;
             //srand(time(0));
             //Loop until correct position is found
-            do{
+            do {
                 x = rand.nextInt(Common.gamemap.size());
                 y = rand.nextInt(Common.getGamemap().get(0).size());
-            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            } while (Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Chicken(x, y, false);
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
             Common.gamemap.get(x).get(y).animalOccupy(a);
         }
-    
+
         //Spawn 4 Ducks
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             int x = 0;
             int y = 0;
             //srand(time(0));
             //Loop until correct position is found
-            do{
+            do {
                 x = rand.nextInt(Common.gamemap.size());
                 y = rand.nextInt(Common.getGamemap().get(0).size());
-            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            } while (Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Duck(x, y, false);
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
             Common.gamemap.get(x).get(y).animalOccupy(a);
         }
-        
+
         //Spawn 8 Cows
-        for(int i = 0; i < 8; i++){
+        for (int i = 0; i < 8; i++) {
             int x = 0;
             int y = 0;
             //srand(time(0));
             //Loop until correct position is found
-            do{
+            do {
                 x = rand.nextInt(Common.gamemap.size());
                 y = rand.nextInt(Common.getGamemap().get(0).size());
-            } while(Common.gamemap.get(x).get(y).showSymbol() != '.' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            } while (Common.gamemap.get(x).get(y).showSymbol() != '.' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Cow(x, y, false);
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
             Common.gamemap.get(x).get(y).animalOccupy(a);
         }
-        
+
         //Spawn 7 Goats
-        for(int i = 0; i < 7; i++){
+        for (int i = 0; i < 7; i++) {
             int x = 0;
             int y = 0;
             //srand(time(0));
             //Loop until correct position is found
-            do{
+            do {
                 x = rand.nextInt(Common.gamemap.size());
                 y = rand.nextInt(Common.getGamemap().get(0).size());
-            } while(Common.gamemap.get(x).get(y).showSymbol() != '.' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            } while (Common.gamemap.get(x).get(y).showSymbol() != '.' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Goat(x, y, false);
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
             Common.gamemap.get(x).get(y).animalOccupy(a);
         }
-        
+
         //Spawn 5 Pigs
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             int x = 0;
             int y = 0;
             //srand(time(0));
             //Loop until correct position is found
-            do{
+            do {
                 x = rand.nextInt(Common.gamemap.size());
                 y = rand.nextInt(Common.getGamemap().get(0).size());
-            } while(Common.gamemap.get(x).get(y).showSymbol() != 'x' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            } while (Common.gamemap.get(x).get(y).showSymbol() != 'x' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Pig(x, y, false);
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
             Common.gamemap.get(x).get(y).animalOccupy(a);
         }
-        
+
         //Spawn 4 Horses
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             int x = 0;
             int y = 0;
             //srand(time(0));
             //Loop until correct position is found
-            do{
+            do {
                 x = rand.nextInt(Common.gamemap.size());
                 y = rand.nextInt(Common.getGamemap().get(0).size());
-            } while(Common.gamemap.get(x).get(y).showSymbol() != 'x' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            } while (Common.gamemap.get(x).get(y).showSymbol() != 'x' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Horse(x, y, false);
             //add animal into list of animal
             Common.animalList.add(a);
@@ -262,16 +262,18 @@ public class Main{
         }
 
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ;
         PrintStream ps = new PrintStream(baos);
         // IMPORTANT: Save the old System.out!
         PrintStream old = System.out;
         
 
+        /*
         while(!command.equals("exit") && Common.animalList.size() > 0){
             // print 'local' content
             //clearscreen()
-      
+
             //Move all animal every 2 ticks
             if(tick != 0 && tick % 2 == 0){
                 com.moveAllAnimals();
@@ -287,7 +289,7 @@ public class Main{
                     Common.animalList.remove(i);
                 }
             }
-            
+
             //Update all facilities:
             com.updateAllFacilities();
 
@@ -369,9 +371,11 @@ public class Main{
             System.setOut(old);
         }
 
-        
+
         System.out.println("                 GAME OVER");
         System.out.println("---------------------------------------------");
         System.out.println("Final score: " + mainPlayer.getScore());
+    }
+    */
     }
 }
