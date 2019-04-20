@@ -158,7 +158,7 @@ public class Main{
             } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Chicken(x, y, false);
             //add animal into list of animal
-            Common.animalList.push_back(a);
+            Common.animalList.add(a);
             //update gamemap
             gamemap.get(x).get(y).animalOccupy(a);
         }
@@ -175,7 +175,7 @@ public class Main{
             } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Duck(x, y, false);
             //add animal into list of animal
-            Common.animalList.push_back(a);
+            Common.animalList.add(a);
             //update gamemap
             gamemap.get(x).get(y).animalOccupy(a);
         }
@@ -192,7 +192,7 @@ public class Main{
             } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Cow(x, y, false);
             //add animal into list of animal
-            Common.animalList.push_back(a);
+            Common.animalList.add(a);
             //update gamemap
             gamemap.get(x).get(y).animalOccupy(a);
         }
@@ -209,7 +209,7 @@ public class Main{
             } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Goat(x, y, false);
             //add animal into list of animal
-            Common.animalList.push_back(a);
+            Common.animalList.add(a);
             //update gamemap
             gamemap.get(x).get(y).animalOccupy(a);
         }
@@ -226,7 +226,7 @@ public class Main{
             } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Pig(x, y, false);
             //add animal into list of animal
-            Common.animalList.push_back(a);
+            Common.animalList.add(a);
             //update gamemap
             gamemap.get(x).get(y).animalOccupy(a);
         }
@@ -243,7 +243,7 @@ public class Main{
             } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Horse(x, y, false);
             //add animal into list of animal
-            Common.animalList.push_back(a);
+            Common.animalList.add(a);
             //update gamemap
             gamemap.get(x).get(y).animalOccupy(a);
         }
