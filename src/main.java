@@ -27,7 +27,7 @@ public class main{
         System.out.println();
 
         while (row.hasNext()){
-            System.out.print("|");
+            System.out.print("| ");
             col=row.next().iterator();
             while (col.hasNext()){
                 Cell tempCol = col.next();
@@ -144,6 +144,7 @@ public class main{
         Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
         
         //clearscreen()
+        printMap(0,0,0);
 
         //Bagian Spawn Animal secara random
         //Spawn 3 Chickens
@@ -154,8 +155,8 @@ public class main{
             //srand(time(0));
             //Loop until correct position is found
             do{
-                x = (rand.nextInt() % (Common.gamemap.size()));
-                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
+                x = rand.nextInt(Common.gamemap.size());
+                y = rand.nextInt(Common.getGamemap().get(0).size());
             } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Chicken(x, y, false);
             //add animal into list of animal
@@ -171,8 +172,8 @@ public class main{
             //srand(time(0));
             //Loop until correct position is found
             do{
-                x = (rand.nextInt() % (Common.gamemap.size()));
-                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
+                x = rand.nextInt(Common.gamemap.size());
+                y = rand.nextInt(Common.getGamemap().get(0).size());
             } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Duck(x, y, false);
             //add animal into list of animal
@@ -180,7 +181,7 @@ public class main{
             //update gamemap
             Common.gamemap.get(x).get(y).animalOccupy(a);
         }
-    
+        
         //Spawn 8 Cows
         for(int i = 0; i < 8; i++){
             int x = 0;
@@ -188,8 +189,8 @@ public class main{
             //srand(time(0));
             //Loop until correct position is found
             do{
-                x = (rand.nextInt() % (Common.gamemap.size()));
-                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
+                x = rand.nextInt(Common.gamemap.size());
+                y = rand.nextInt(Common.getGamemap().get(0).size());
             } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Cow(x, y, false);
             //add animal into list of animal
@@ -197,7 +198,7 @@ public class main{
             //update gamemap
             Common.gamemap.get(x).get(y).animalOccupy(a);
         }
-    
+        
         //Spawn 7 Goats
         for(int i = 0; i < 7; i++){
             int x = 0;
@@ -205,8 +206,8 @@ public class main{
             //srand(time(0));
             //Loop until correct position is found
             do{
-                x = (rand.nextInt() % (Common.gamemap.size()));
-                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
+                x = rand.nextInt(Common.gamemap.size());
+                y = rand.nextInt(Common.getGamemap().get(0).size());
             } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Goat(x, y, false);
             //add animal into list of animal
@@ -214,7 +215,7 @@ public class main{
             //update gamemap
             Common.gamemap.get(x).get(y).animalOccupy(a);
         }
-
+        
         //Spawn 5 Pigs
         for(int i = 0; i < 5; i++){
             int x = 0;
@@ -222,16 +223,16 @@ public class main{
             //srand(time(0));
             //Loop until correct position is found
             do{
-                x = (rand.nextInt() % (Common.gamemap.size()));
-                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
-            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+                x = rand.nextInt(Common.gamemap.size());
+                y = rand.nextInt(Common.getGamemap().get(0).size());
+            } while(Common.gamemap.get(x).get(y).showSymbol() != 'x' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Pig(x, y, false);
             //add animal into list of animal
             Common.animalList.add(a);
             //update gamemap
             Common.gamemap.get(x).get(y).animalOccupy(a);
         }
-
+        
         //Spawn 4 Horses
         for(int i = 0; i < 4; i++){
             int x = 0;
@@ -239,9 +240,9 @@ public class main{
             //srand(time(0));
             //Loop until correct position is found
             do{
-                x = (rand.nextInt() % (Common.gamemap.size()));
-                y = (rand.nextInt() % (Common.getGamemap().get(0).size()));
-            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+                x = rand.nextInt(Common.gamemap.size());
+                y = rand.nextInt(Common.getGamemap().get(0).size());
+            } while(Common.gamemap.get(x).get(y).showSymbol() != 'x' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Horse(x, y, false);
             //add animal into list of animal
             Common.animalList.add(a);
@@ -255,7 +256,6 @@ public class main{
         // IMPORTANT: Save the old System.out!
         PrintStream old = System.out;
         
-
 
         while(command != "exit" && Common.animalList.size() > 0){
             // print 'local' content
@@ -295,39 +295,43 @@ public class main{
             System.out.println();
 
             System.out.println("OUTPUT: ");
-            if (baos != null){
-                System.out.println(baos.toString());
-            }
+            // if (baos != null){
+            System.out.println(baos.toString());
+            // }
             baos = new ByteArrayOutputStream();
 
             System.out.print("Command: ");
-            command = (scanner.nextLine()).toLowerCase();
+            command = scanner.next();
+            command = command.toLowerCase();
+            // System.out.println("command: "+command);
             //lowercase the command input
             System.out.println();
 
+            ps = new PrintStream(baos);
             System.setOut(ps);
             String c;
-            if(command == "talk"){ //talk action
+            if(command.equals("talk")){ //talk action
                 c = scanner.next(); //direction to talk to
                 mainPlayer.talk(c.charAt(0));
-            } else if(command == "interact"){ //interact action
+            } else if(command.equals("interact")){ //interact action
                 c = scanner.next(); //direction to interact to
                 mainPlayer.interact(c.charAt(0));
-            } else if(command == "kill"){ //kill action
+            } else if(command.equals("kill")){ //kill action
                 c = scanner.next(); //direction to kill animal
                 mainPlayer.kill(c.charAt(0));
-            } else if(command == "grow"){ //grow action
+            } else if(command.equals("grow")){ //grow action
                 mainPlayer.grow();
-            } else if(command == "mix"){ //mix action
+            } else if(command.equals("mix")){ //mix action
                 c = scanner.next();
                 String menu;
                 menu = scanner.next();
                 mainPlayer.mix(c.charAt(0),menu);
-            } else if(command == "w" || command == "a" || command == "s" || command == "d"){ //move action
+            } else if(command.equals("w") || command.equals("a") || command.equals("s") || command.equals("d")){ //move action
                 Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
                 mainPlayer.move(command.charAt(0));
                 Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
-            } else if(command == "cheats"){
+                System.out.println("position of player : "+ mainPlayer.getRow() + " " + mainPlayer.getCol());
+            } else if(command.equals("cheats")){
                 int x,y;
                 y = scanner.nextInt();
                 x = scanner.nextInt();
@@ -336,7 +340,7 @@ public class main{
                 mainPlayer.setCol(x);
                 mainPlayer.setRow(y);
                 Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
-            } else if(command == "exit"){
+            } else if(command.equals("exit")){
             } else{
                 tick--;
                 System.out.println("Invalid command");
@@ -355,7 +359,7 @@ public class main{
             System.setOut(old);
         }
 
-        // printMap(0,0,0);
+        
         System.out.println("                 GAME OVER");
         System.out.println("---------------------------------------------");
         System.out.println("Final score: " + mainPlayer.getScore());
