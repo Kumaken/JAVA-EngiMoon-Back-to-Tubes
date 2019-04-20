@@ -15,6 +15,7 @@ public class Cell{
     protected int restCountdown;
     protected FarmAnimal Animalref;
     protected Facility Facilityref;
+    protected int x,y;
 
 //Abstract Methods:
     // Make grass grow:
@@ -22,6 +23,13 @@ public class Cell{
 
     // Ungrow the grass:
     public void ungrowGrass(){};
+
+    //updatefacil:
+    public void facilityUpdate(){};
+
+    //invalidate facility:
+    public void invalidateFacility(){};
+
 //Constructors:   
     // Constructor 
     public Cell(){
@@ -52,7 +60,17 @@ public class Cell{
         // Getter for FacilityPtr:
         public Facility getFacilityRef() {
             return this.Facilityref;
-        }   
+        }
+
+        //getX
+        public int getX(){
+            return this.x;
+        }
+
+        //getY
+        public int getY(){
+            return this.y;
+        }
 
     //Setters:
         // Animal occupies cell
@@ -73,6 +91,12 @@ public class Cell{
         // Set Facility ptr
         public void setFacilityRef(Facility _facilityref){
             this.Facilityref = _facilityref;
+        }
+
+        // Setpos
+        public void setPos(int x, int y){
+            this.x = x;
+            this.y = y;
         }
     }
 

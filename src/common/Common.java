@@ -16,7 +16,7 @@ import java.io.*;
 public class Common{
     public static ArrayList<ArrayList<Cell>> gamemap;
     public static ArrayList<FarmAnimal> animalList;
-    public static ArrayList<Facility> facilityList;
+    public static ArrayList<Cell> facilityList;
 
     public static ArrayList<ArrayList<Cell>> getGamemap() {
         return gamemap;
@@ -26,18 +26,18 @@ public class Common{
         return animalList;
     }
 
-    public static ArrayList<Facility> getFacilityList() {
+    public static ArrayList<Cell> getFacilityList() {
         return facilityList;
     }
 
     public Common(){
         gamemap = new ArrayList<ArrayList<Cell>>();
         animalList = new ArrayList<FarmAnimal>();
-        facilityList = new ArrayList<Facility>();
+        facilityList = new ArrayList<Cell>();
         loadMap();
     }
 
-    public void classIdentifier(char c, ArrayList<Cell> v){
+    public void classIdentifier(char c, ArrayList<Cell> v, int row, int col){
         if(c == '.'){
             v.add(new Grassland());
         } else if(c == '#'){
@@ -58,16 +58,19 @@ public class Common{
             v.add(new Barn());
         } else if(c == 'T'){
             Truck temp = new Truck();
+            temp.setPos(row, col);
             v.add(temp);
             facilityList.add(temp);
             v.get(v.size()-1).setFacilityRef(temp);
         } else if(c == 'W'){
             Well temp = new Well();
+            temp.setPos(row, col);
             v.add(temp);
             facilityList.add(temp);
             v.get(v.size()-1).setFacilityRef((temp));;
         } else if(c == 'M'){
             Mixer temp = new Mixer();
+            temp.setPos(row, col);
             v.add(temp);
             facilityList.add(temp);
             v.get(v.size()-1).setFacilityRef(temp);
@@ -76,17 +79,19 @@ public class Common{
 
     public void loadMap(){
         try{
-            String filename = "..//mapschema.txt";
+            String filename = "mapschema.txt";
             File f = new File(filename);
             Scanner read = new Scanner(f);
             String line = "";
+            int row=0;
             while(read.hasNextLine()){
                 ArrayList<Cell> tempv = new ArrayList<Cell>();
                 line = read.nextLine();
                 for(int i = 0; i < line.length(); i++){
-                    classIdentifier(line.charAt(i), tempv);
+                    classIdentifier(line.charAt(i), tempv, row, i);
                 }
                 gamemap.add(tempv);
+                row++;
             }
             read.close();
         } catch(Exception e){
@@ -110,14 +115,4 @@ public class Common{
             facilityList.get(i).facilityUpdate();
         }
     }
-
-//    public static void main(String[] args){
-//        Common a = new Common();
-//        for(ArrayList<Cell> innerList : gamemap) {
-//            for (Cell b : innerList) {
-//                System.out.print(b.showSymbol());
-//            }
-//            System.out.println();
-//        }
-//    }
 }

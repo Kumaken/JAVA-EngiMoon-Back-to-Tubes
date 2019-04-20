@@ -42,6 +42,7 @@ public abstract class FarmAnimal {
     } //mengecek apakah objek dari kelas ini lapar atau tidak
     public void revLapar(){
         lapar = !lapar;
+        revSimbol();
     } //mengubah nilai lapar dari objek
     public int getX(){
         return x;

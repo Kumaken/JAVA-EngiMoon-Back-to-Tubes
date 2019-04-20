@@ -8,7 +8,7 @@ import common.Common;
 
 @SuppressWarnings("unchecked")
 class Player{
-    private static final int MAX_WATER = 5;
+    private static final int MAX_WATER = 10;
 
     private final ArrayList<Character> EGGPRODUCINGANIMAL = new ArrayList<Character>(Arrays.asList(new Character[]{'C','D'}));
     private final ArrayList<Character> MILKPRODUCINGANIMAL = new ArrayList<Character>(Arrays.asList(new Character[]{'S','G'}));
@@ -109,6 +109,8 @@ class Player{
                     return;
                 }
 
+                cell.getFacilityRef().invalidateFacility();
+
                 int money=0;
                 Iterator<Product> itr = backpack.iterator();
                 while (itr.hasNext()){
@@ -140,9 +142,7 @@ class Player{
             System.out.println(cell.getAnimalRef().sound());
             cell.makeUnoccupied();
             System.out.println("Animal's killed");
-    
-            //ArrayList<FarmAnimal*>::const_iterator itr = find(animalList.begin(), animalList.end(),cell.getAnimalPtr());
-            //if (itr!=animalList.end()) animalList.erase(itr);
+            Common.animalList.remove(cell.getAnimalRef());
         } else{
             System.out.println("There's no animal..");
         }

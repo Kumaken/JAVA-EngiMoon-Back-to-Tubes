@@ -5,7 +5,7 @@ import common.*;
 import java.util.*;
 import java.io.*;
 
-public class main{
+public class Main{
     public static void printMap(int money, int aqua, int tick){
         Iterator<ArrayList<Cell>> row = Common.getGamemap().iterator();
         Iterator<Cell> col;
@@ -113,6 +113,20 @@ public class main{
 
     public static void printLegend(){
         System.out.println("Keterangan:                  Controls:");
+        System.out.println("B : Pig                      w : go up");
+        System.out.println("C : Chicken                  a : go left");
+        System.out.println("D : Duck                     s : go down");
+        System.out.println("G : Goat                     d : go right");
+        System.out.println("H : Horse");
+        System.out.println("S : Cow                      talk (dir)        : talk to animal");
+        System.out.println("M : Mixer                    interact (dir)    : interact with things");
+        System.out.println("T : Truck                    kill (dir)        : kill animal");
+        System.out.println("W : Well                     grow (dir)        : grow grass");
+        System.out.println("P : Player                   mix (dir, recipe) : mix ingredients");
+        System.out.println("x : Barn                     exit              : exit the game");
+        System.out.println("o : Coop");
+        System.out.println(". : Grassland");
+        System.out.println("*, @, # : Grass");
     }
 
     public static void clearScreen() {  
@@ -142,9 +156,6 @@ public class main{
         Player mainPlayer = new Player(4,3);
 
         Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
-        
-        //clearscreen()
-        printMap(0,0,0);
 
         //Bagian Spawn Animal secara random
         //Spawn 3 Chickens
@@ -191,7 +202,7 @@ public class main{
             do{
                 x = rand.nextInt(Common.gamemap.size());
                 y = rand.nextInt(Common.getGamemap().get(0).size());
-            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            } while(Common.gamemap.get(x).get(y).showSymbol() != '.' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Cow(x, y, false);
             //add animal into list of animal
             Common.animalList.add(a);
@@ -208,7 +219,7 @@ public class main{
             do{
                 x = rand.nextInt(Common.gamemap.size());
                 y = rand.nextInt(Common.getGamemap().get(0).size());
-            } while(Common.gamemap.get(x).get(y).showSymbol() != 'o' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
+            } while(Common.gamemap.get(x).get(y).showSymbol() != '.' || (Common.gamemap.get(x).get(y).getOverrideSymbol() != '\0'));
             FarmAnimal a = new Goat(x, y, false);
             //add animal into list of animal
             Common.animalList.add(a);
@@ -257,7 +268,7 @@ public class main{
         PrintStream old = System.out;
         
 
-        while(command != "exit" && Common.animalList.size() > 0){
+        while(!command.equals("exit") && Common.animalList.size() > 0){
             // print 'local' content
             //clearscreen()
       
@@ -283,7 +294,7 @@ public class main{
             //print the map
             printMap(mainPlayer.getScore(), mainPlayer.getPouch(), tick);
             //print the legend
-            printLegend();
+            //printLegend();
             //if all animal is dead, break from loop and game over
             if(Common.animalList.size() == 0){
               break;
@@ -330,7 +341,6 @@ public class main{
                 Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
                 mainPlayer.move(command.charAt(0));
                 Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();
-                System.out.println("position of player : "+ mainPlayer.getRow() + " " + mainPlayer.getCol());
             } else if(command.equals("cheats")){
                 int x,y;
                 y = scanner.nextInt();
