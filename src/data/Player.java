@@ -30,7 +30,7 @@ public class Player{
     }
 
     public Player(int _row, int _col){
-        row = _row; col = _col; score = 0; pouch = 5;
+        row = _row; col = _col; score = 0; pouch = 10;
         backpack = new LinkedList<Product>();
     }
 
@@ -275,11 +275,17 @@ public class Player{
         }
     }
 
-    public void printBackpack(){
+    public String[] printBackpack(){
         Iterator<Product> itr = backpack.iterator();
+        String[] temp = new String[]{"","","","","",""};
+        int i = 0;
         while (itr.hasNext()){
-            System.out.print(itr.next().getProductName() + " ");
+            if(i > 5){
+                break;
+            }
+            temp[i] = itr.next().getProductName();
+            i++;
         }
-        System.out.println();
+        return temp;
     }
 }
