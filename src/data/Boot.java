@@ -56,7 +56,7 @@ public class Boot {
         }
 
         TrueTypeFont font = null;
-        Font awtFont = new Font("Times New Roman", Font.BOLD, 24);
+        Font awtFont = new Font("Times New Roman", Font.BOLD, 20);
         font = new TrueTypeFont(awtFont, false);
 
         String[] inventory_content;
@@ -65,29 +65,49 @@ public class Boot {
         //GUI loop
         while(!Display.isCloseRequested()){ //while not prompted to close
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            font.drawString(50, 700, "CONTROLS");
+            font.drawString(50, 730, "Move     = w/a/s/d");
+            font.drawString(50, 755, "Grow     = g");
+            font.drawString(50, 780, "Talk       = t + <arrow_key>");
+            font.drawString(50, 805, "Kill         = k + <arrow_key>");
+            font.drawString(50, 830, "Interact = i + <arrow_key>");
+            font.drawString(50, 855, "Mix        = m + <arrow_key> + <recipe_code>");
+            font.drawString(50, 880, "Exit        = ESC_KEY");
+            font.drawString(450, 700, "RECIPE CODE");
+            font.drawString(450, 730, "Mixed Cheese    = 0");
+            font.drawString(450, 755, "(Cow Milk + Goat Milk)");
+            font.drawString(450, 785, "Horse Rolade     = 1");
+            font.drawString(450, 810, "(Horse Meat + Duck Egg)");
+            font.drawString(450, 840, "Bacon Omelette = 2");
+            font.drawString(450, 865, "(Pig Meat + Chicken Egg)");
             inventory_content = mainPlayer.printBackpack();
-            font.drawString(100, 700, "INVENTORY:");
-            font.drawString(110, 730, "1. " + inventory_content[0]);
-            font.drawString(110, 760, "2. " + inventory_content[1]);
-            font.drawString(110, 790, "3. " + inventory_content[2]);
-            font.drawString(110, 820, "4. " + inventory_content[3]);
-            font.drawString(110, 850, "5. " + inventory_content[4]);
-            font.drawString(110, 880, "6. " + inventory_content[5]);
-            font.drawString(500, 700, "OUTPUT:");
+            font.drawString(700, 700, "INVENTORY:");
+            font.drawString(700, 730, "1. " + inventory_content[0]);
+            font.drawString(700, 755, "2. " + inventory_content[1]);
+            font.drawString(700, 780, "3. " + inventory_content[2]);
+            font.drawString(700, 805, "4. " + inventory_content[3]);
+            font.drawString(700, 830, "5. " + inventory_content[4]);
+            font.drawString(700, 855, "6. " + inventory_content[5]);
+            font.drawString(900, 700, "OUTPUT:");
 
             if(outContent.toString().contains("Animal's killed")){
                 String[] str_piece = outContent.toString().split("A", 2);
-                font.drawString(500, 730, "It cries: " + str_piece[0]);
-                font.drawString(500, 760, "A" + str_piece[1]);
+                font.drawString(900, 730, "It cries : " + str_piece[0]);
+                font.drawString(900, 755, "A" + str_piece[1]);
+                if(Common.animalList.size() == 0){
+                    font.drawString(900, 780, "---------------");
+                    font.drawString(900, 805, "Game Over");
+                    font.drawString(900, 830, "Final Score: " + mainPlayer.getScore());
+                }
             } else if(Common.animalList.size() == 0){
-                font.drawString(500, 730, "Game Over");
-                font.drawString(500, 760, "Final Score: " + mainPlayer.getScore());
+                font.drawString(900, 730, "Game Over");
+                font.drawString(900, 755, "Final Score: " + mainPlayer.getScore());
             } else{
-                font.drawString(500, 730, outContent.toString());
+                font.drawString(900, 730, outContent.toString());
             }
-            font.drawString(1000, 700, "TICK     =  " + tick);
-            font.drawString(1000, 750, "MONEY    =  " + mainPlayer.getScore());
-            font.drawString(1000, 800, "WATER    =  " + mainPlayer.getPouch());
+            font.drawString(1150, 700, "TICK         =  " + tick);
+            font.drawString(1150, 730, "MONEY    =  " + mainPlayer.getScore());
+            font.drawString(1150, 760, "WATER    =  " + mainPlayer.getPouch());
             if (Keyboard.next() && Keyboard.getEventKeyState()) {
                 outContent.reset();
                 setUpStreams();
