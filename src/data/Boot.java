@@ -1,29 +1,25 @@
 package data;
 //dependencies:
     import common.Common;
-    import org.lwjgl.LWJGLException;
     import org.lwjgl.opengl.Display;
-    import org.lwjgl.opengl.DisplayMode;
+
     //for opengl:
     import static org.lwjgl.opengl.GL11.*;
+
     //import helpers:
     import static helpers.Artist.*;
+
     //import texture:
-    import org.newdawn.slick.Color;
     import org.newdawn.slick.TrueTypeFont;
-    import org.newdawn.slick.opengl.Texture;
+
     //keyboard control:
     import org.lwjgl.input.Keyboard;
 
 //substitute main:
-    import product.*;
-    import cells.*;
     import animals.*;
-    import common.*;
 
     import java.awt.*;
     import java.io.ByteArrayOutputStream;
-    import java.io.IOException;
     import java.io.PrintStream;
     import java.util.*;
 

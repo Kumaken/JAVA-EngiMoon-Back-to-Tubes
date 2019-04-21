@@ -2,7 +2,6 @@ package common;
 
 import animals.FarmAnimal;
 import cells.Cell;
-import cells.facilities.Facility;
 import cells.facilities.Mixer;
 import cells.facilities.Truck;
 import cells.facilities.Well;

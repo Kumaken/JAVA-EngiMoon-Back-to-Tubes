@@ -2,8 +2,6 @@ package data;
 
 import common.Common;
 
-import org.newdawn.slick.opengl.Texture;
-import static helpers.Artist.drawQuadTexture;
 import static helpers.Artist.quickLoad;
 
 public class TileGrid {
@@ -13,7 +11,6 @@ public class TileGrid {
     public TileGrid(){
         //pay attention: map here is constructed with reversed i & j from Common.gamemap!
         map = new Tile[Common.gamemap.size()][Common.gamemap.get(0).size()];
-        //System.out.println(Common.gamemap.size() + " >>> " + Common.gamemap.get(0).size());
 
         for (int i =0; i < map.length; i++){
             for (int j=0; j< map[i].length; j++){
