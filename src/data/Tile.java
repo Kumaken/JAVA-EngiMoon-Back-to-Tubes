@@ -4,6 +4,9 @@ import org.newdawn.slick.opengl.Texture;
 
 import static helpers.Artist.*;
 
+/**
+ * Method to load tile and the texture
+ */
 public class Tile {
     private float x, y, width, height;
     private Texture texture;

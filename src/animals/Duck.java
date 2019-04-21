@@ -6,6 +6,9 @@ import product.farmproduct.DuckEgg;
 import product.farmproduct.DuckMeat;
 import common.Common;
 
+/**
+ * Class for duck
+ */
 public class Duck extends FarmAnimal implements EggProducing, MeatProducing{
     public Duck(int x, int y, boolean l){
         super(x,y,l);

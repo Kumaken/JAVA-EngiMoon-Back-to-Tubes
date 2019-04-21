@@ -6,6 +6,9 @@ import product.farmproduct.GoatMilk;
 import product.farmproduct.GoatMeat;
 import common.Common;
 
+/**
+ * Class for goat
+ */
 public class Goat extends FarmAnimal implements MilkProducing, MeatProducing{
     public Goat(int x, int y, boolean l){
         super(x,y,l);

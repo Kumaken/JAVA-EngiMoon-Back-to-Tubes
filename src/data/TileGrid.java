@@ -4,14 +4,19 @@ import common.Common;
 
 import static helpers.Artist.quickLoad;
 
+/**
+ * Class to load matrix of game map
+ */
 public class TileGrid {
     public static final int TILEWIDTH = 44, TILEHEIGHT = 48, OBJECTWIDTH = 56, OBJECTHEIGHT = 56;
     public Tile[][] map;
 
     public TileGrid(){
-        //pay attention: map here is constructed with reversed i & j from Common.gamemap!
         map = new Tile[Common.gamemap.size()][Common.gamemap.get(0).size()];
 
+        /**
+         * Loop to add land and grass
+         */
         for (int i =0; i < map.length; i++){
             for (int j=0; j< map[i].length; j++){
                 if ( (Common.gamemap.get(i)).get(j).showSymbol() == '.')
@@ -38,9 +43,16 @@ public class TileGrid {
         }
     }
 
+    /**
+     * Method to add occupied tiles
+     */
     public void handleOccupiedTiles() {
         //handle player:
         Boot.objectList.add(new Object(quickLoad("player"), Boot.grid.getTile(Boot.mainPlayer.getRow(), Boot.mainPlayer.getCol()), OBJECTWIDTH, OBJECTHEIGHT));
+
+        /**
+         * Loop to add animals
+         */
         for (int i = 0; i < Common.animalList.size(); i++) {
             //System.out.println("x: "+ Common.animalList.get(i).getX() +" | y: "+ Common.animalList.get(i).getY());
             if (Common.animalList.get(i).showSimbol() == 'C')
@@ -69,6 +81,9 @@ public class TileGrid {
                 Boot.objectList.add(new Object(quickLoad("duck off"), Boot.grid.getTile(Common.animalList.get(i).getX(), Common.animalList.get(i).getY()), OBJECTWIDTH, OBJECTHEIGHT));
         }
 
+        /**
+         * Loop to add facilities
+         */
         for (int i = 0; i < Common.facilityList.size(); i++) {
             //System.out.println("x: " + Common.facilityList.get(i).getX() + " | y: " + Common.facilityList.get(i).getY());
             if (Common.facilityList.get(i).showSymbol() == 'W')
@@ -86,14 +101,29 @@ public class TileGrid {
         }
     }
 
+    /**
+     * Setter for the map tile
+     * @param x
+     * @param y
+     * @param type
+     */
     public void setTile(int x, int y, TileType type){
         map[x][y] = new Tile(x*TILEWIDTH, y*TILEHEIGHT, TILEWIDTH, TILEHEIGHT, type);
     }
 
+    /**
+     * Getter for the map tile
+     * @param x
+     * @param y
+     * @return the tile in x and y position
+     */
     public Tile getTile(int x, int y){
         return map[x][y];
     }
 
+    /**
+     * Method to draw the tile
+     */
     public void draw(){
         for (int i =0; i < map.length; i++){
             for (int j=0; j< map[i].length; j++){

@@ -5,6 +5,9 @@ import product.FarmProduct;
 import product.farmproduct.PigMeat;
 import common.Common;
 
+/**
+ * Class for pig
+ */
 public class Pig extends FarmAnimal implements MeatProducing{
     public Pig(int x, int y, boolean l){
         super(x,y,l);

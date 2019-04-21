@@ -2,9 +2,17 @@ package cells; //package must be lowercase
 import cells.facilities.*;
 import animals.FarmAnimal;
 // Base Class : Cell
-/* Kelas Cell adalah base class yang merepresentasikan setiap objek-objek yang akan muncul di map, seperti semua objek Facility, objek Land, objek Farm Animal, dan Player. Kelas ini memiliki atribut symbol bertipe char yang unik bagi setiap objek di map dan method getter untuk simbol tersebut.*/
+/* Kelas Cell adalah class yang merepresentasikan
+   setiap objek-objek yang akan muncul di map, seperti
+   semua objek Facility, objek Land, objek Farm Animal,
+   dan Player. Kelas ini memiliki atribut symbol
+   bertipe char yang unik bagi setiap objek di map dan
+   method getter untuk simbol tersebut.*/
 
-// To solve circular dependencies, include .h files at .cpp files
+/**
+ * Parent class to represent all object in map (Facility objects,
+ * Land objects, Animal objects, and Player)
+ */
 public class Cell{
 //Attributes:
     // Innate attributes of class:

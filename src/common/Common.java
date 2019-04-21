@@ -12,9 +12,22 @@ import cells.lands.Grassland;
 import java.util.*;
 import java.io.*;
 
+/**
+ * Class for storing various variables used in multiple package.
+ * This Class is used to replace extern in C++
+ */
 public class Common{
+    /**
+     * Variable to store map of the game
+     */
     public static ArrayList<ArrayList<Cell>> gamemap;
+    /**
+     * Variable to store all current animal in the game
+     */
     public static ArrayList<FarmAnimal> animalList;
+    /**
+     * Variable to store all facility in the game
+     */
     public static ArrayList<Cell> facilityList;
 
     public static ArrayList<ArrayList<Cell>> getGamemap() {
@@ -29,6 +42,9 @@ public class Common{
         return facilityList;
     }
 
+    /**
+     * Construct, initialize, and read map file
+     */
     public Common(){
         gamemap = new ArrayList<ArrayList<Cell>>();
         animalList = new ArrayList<FarmAnimal>();
@@ -36,6 +52,9 @@ public class Common{
         loadMap();
     }
 
+    /**
+     * Method to identify characters from the map file
+     */
     public void classIdentifier(char c, ArrayList<Cell> v, int row, int col){
         if(c == '.'){
             v.add(new Grassland());
@@ -76,6 +95,9 @@ public class Common{
         }
     }
 
+    /**
+     * Method to load the map file and read it
+     */
     public void loadMap(){
         try{
             String filename = "mapschema.txt";
@@ -99,8 +121,9 @@ public class Common{
         }
     }
 
-//    public void setInMap()
-
+    /**
+     * Method to move all current animals randomly
+     */
     public void moveAllAnimals(){
         for(int i = 0; i < animalList.size(); i++){
             gamemap.get(animalList.get(i).getX()).get(animalList.get(i).getY()).makeUnoccupied();
@@ -109,6 +132,9 @@ public class Common{
         }
     }
 
+    /**
+     * Method to update all facility. Used to calculate downtime status
+     */
     public void updateAllFacilities(){
         for(int i = 0; i < facilityList.size(); i++){
             facilityList.get(i).facilityUpdate();
