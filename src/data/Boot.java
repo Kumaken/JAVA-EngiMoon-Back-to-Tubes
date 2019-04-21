@@ -1,32 +1,31 @@
 package data;
 //dependencies:
     import common.Common;
-    import org.lwjgl.LWJGLException;
     import org.lwjgl.opengl.Display;
-    import org.lwjgl.opengl.DisplayMode;
+
     //for opengl:
     import static org.lwjgl.opengl.GL11.*;
+
     //import helpers:
     import static helpers.Artist.*;
+
     //import texture:
-    import org.newdawn.slick.Color;
     import org.newdawn.slick.TrueTypeFont;
-    import org.newdawn.slick.opengl.Texture;
+
     //keyboard control:
     import org.lwjgl.input.Keyboard;
 
 //substitute main:
-    import product.*;
-    import cells.*;
     import animals.*;
-    import common.*;
 
     import java.awt.*;
     import java.io.ByteArrayOutputStream;
-    import java.io.IOException;
     import java.io.PrintStream;
     import java.util.*;
 
+/**
+ * The main part of program
+ */
 public class Boot {
     public static ArrayList<Object> objectList = new ArrayList<Object>();
     public static TileGrid grid;
@@ -44,6 +43,9 @@ public class Boot {
         //call helpers: Artist to load screen:
         beginSession();
 
+        /**
+         * Load and draw the map
+         */
         //loadmap:
         grid = new TileGrid();
         //drawmap:
@@ -55,6 +57,9 @@ public class Boot {
             objectList.get(i).draw();
         }
 
+        /**
+         * Initialize string writer for GUI
+         */
         TrueTypeFont font = null;
         Font awtFont = new Font("Times New Roman", Font.BOLD, 20);
         font = new TrueTypeFont(awtFont, false);
@@ -62,7 +67,9 @@ public class Boot {
         String[] inventory_content;
         int pass = 0;
 
-        //GUI loop
+        /**
+         * GUI Loop
+         */
         while(!Display.isCloseRequested()){ //while not prompted to close
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             font.drawString(50, 700, "CONTROLS");
@@ -108,9 +115,14 @@ public class Boot {
             font.drawString(1150, 700, "TICK         =  " + tick);
             font.drawString(1150, 730, "MONEY    =  " + mainPlayer.getScore());
             font.drawString(1150, 760, "WATER    =  " + mainPlayer.getPouch());
+
+            /**
+             * If Keyboard is Pressed
+             */
             if (Keyboard.next() && Keyboard.getEventKeyState()) {
-                outContent.reset();
-                setUpStreams();
+                outContent.reset(); //Reset the STDOUT listener
+                setUpStreams(); //Listen for STDOUT
+
                 //MIX KEY:
                 if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
                     mainPlayer.mix('w', "MixedCheese");
@@ -160,6 +172,7 @@ public class Boot {
                     mainPlayer.mix('a', "BaconOmelette");
                     updateMap();
                 }
+
                 //INTERACT KEY:
                 if(Keyboard.isKeyDown(Keyboard.KEY_I) && Keyboard.isKeyDown(Keyboard.KEY_UP) ){
                     mainPlayer.interact('w');
@@ -195,7 +208,7 @@ public class Boot {
                     updateMap();
                 }
 
-                //MURDER KEY:
+                //KILL KEY:
                 if (Keyboard.isKeyDown(Keyboard.KEY_K) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
                     mainPlayer.kill('w');
                     updateMap();
@@ -217,10 +230,13 @@ public class Boot {
                     mainPlayer.grow();
                     updateMap();
                 }
+
                 //EXIT KEY:
                 if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
                     break;
                 }
+
+                //MOVE KEY:
                 if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
                     Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).makeUnoccupied();
                     mainPlayer.move('w');
@@ -269,6 +285,10 @@ public class Boot {
                 }
             }
         }
+
+        /**
+         * Close the GUI Window after Game Over or ESC KEY pressed
+         */
         Display.destroy();
     }
 
@@ -304,40 +324,27 @@ public class Boot {
         grid = new TileGrid();
     }
 
-    //Functions to catch stdout:
+    /**
+     * Method to catch STDOUT
+     */
     public static void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         //System.setErr(new PrintStream(errContent));
     }
 
+    /**
+     * Method to clear the setOut
+     */
     public static void restoreStreams() {
         System.setOut(originalOut);
         //System.setErr(originalErr);
     }
 
-    public static void printLegend(){
-        System.out.println("Keterangan:                  Controls:");
-        System.out.println("B : Pig                      w : go up");
-        System.out.println("C : Chicken                  a : go left");
-        System.out.println("D : Duck                     s : go down");
-        System.out.println("G : Goat                     d : go right");
-        System.out.println("H : Horse");
-        System.out.println("S : Cow                      talk (dir)        : talk to animal");
-        System.out.println("M : Mixer                    interact (dir)    : interact with things");
-        System.out.println("T : Truck                    kill (dir)        : kill animal");
-        System.out.println("W : Well                     grow (dir)        : grow grass");
-        System.out.println("P : Player                   mix (dir, recipe) : mix ingredients");
-        System.out.println("x : Barn                     exit              : exit the game");
-        System.out.println("o : Coop");
-        System.out.println(". : Grassland");
-        System.out.println("*, @, # : Grass");
-    }
-
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
+    /**
+     * Entry point of program.
+     * Initialize map reader, spawn animals, and create GUI window
+     * @param args
+     */
     public static void main(String[] args){
         com = new Common();
         Common.gamemap.get(mainPlayer.getRow()).get(mainPlayer.getCol()).playerOccupy();

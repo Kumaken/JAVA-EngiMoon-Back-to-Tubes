@@ -4,6 +4,9 @@ import org.newdawn.slick.opengl.Texture;
 
 import static helpers.Artist.drawQuadTexture;
 
+/**
+ * Class to call drawQuadTexture from OpenGL
+ */
 public class Object {
     private int width, height;
     private float x,y;

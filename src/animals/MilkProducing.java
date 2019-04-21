@@ -1,6 +1,8 @@
 package animals;
 
-import product.FarmProduct;
-
+/**
+ * Interface for MilkProducing
+ * Created to maintain diagrams from C++
+ */
 interface MilkProducing{
 }

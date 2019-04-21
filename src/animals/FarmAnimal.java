@@ -2,10 +2,25 @@ package animals;
 
 import product.FarmProduct;
 
+/**
+ * Abstract class as parent class of all animals
+ */
 public abstract class FarmAnimal {
+    /**
+     * Symbol of animal
+     */
     protected char simbol; //menyatakan representasi objek dari kelas ini di map
+    /**
+     * Attribute for hungriness of animal
+     */
     protected int threshold; //menyatakan waktu 'lapar'nya objek dari class ini
+    /**
+     * Attribute to represent whether animal is hungry or not
+     */
     protected boolean lapar; //menyatakan status lapar
+    /**
+     * x and y position of animal
+     */
     protected int x; //posisi
     protected int y; //posisi
 
@@ -16,8 +31,19 @@ public abstract class FarmAnimal {
         simbol = '\0';
         threshold = -999;
     }
+
+    /**
+     * Move method will move the animal into valid tile if possible by checking tiles' current occupant
+     */
     abstract public void move(); //bergerak secara acak sebesar 1 satuan ke kiri, kanan, atas, maupun bawah
+    /**
+     * Method to return the string of animal
+     * @return sound of animal
+     */
     abstract public String sound(); //method pure virtual, mengeluarkan suara
+    /**
+     * Method for animal to eat grass if hungry. Will change hunger status
+     */
     abstract public void eat(); //makan bila lapar
     abstract public FarmProduct produceMeat();
     abstract public FarmProduct produceEgg();
