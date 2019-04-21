@@ -7,12 +7,14 @@ import static helpers.Artist.drawQuadTexture;
 import static helpers.Artist.quickLoad;
 
 public class TileGrid {
-    public static final int TILEWIDTH = 44, TILEHEIGHT = 48, OBJECTWIDTH = 56, OBJECTHEIGHT = 56;
+    public static final int TILEWIDTH = 44, TILEHEIGHT = 48, OBJECTWIDTH = 56, OBJECTHEIGHT = 56,
+            XSIZE = Common.gamemap.size(), YSIZE = Common.gamemap.get(0).size() ;
+
     public Tile[][] map;
 
     public TileGrid(){
         //pay attention: map here is constructed with reversed i & j from Common.gamemap!
-        map = new Tile[Common.gamemap.size()][Common.gamemap.get(0).size()];
+        map = new Tile[XSIZE][YSIZE];
         //System.out.println(Common.gamemap.size() + " >>> " + Common.gamemap.get(0).size());
 
         for (int i =0; i < map.length; i++){
@@ -27,13 +29,13 @@ public class TileGrid {
                     map[i][j] = new Tile(j * TILEWIDTH, i * TILEHEIGHT, TILEWIDTH, TILEHEIGHT, TileType.BarnTile);
                 else if ((Common.gamemap.get(i)).get(j).showSymbol() == '@'){
                     map[i][j] = new Tile(j * TILEWIDTH, i * TILEHEIGHT, TILEWIDTH, TILEHEIGHT, TileType.BarnTile);
-                    Boot.objectList.add(new Object(quickLoad("grass"), map[i][j], OBJECTWIDTH, OBJECTHEIGHT));
+                    Boot.objectList.add(new Object(quickLoad("barngrass"), map[i][j], OBJECTWIDTH, OBJECTHEIGHT));
                 }
                 else if ((Common.gamemap.get(i)).get(j).showSymbol() == 'o')
                     map[i][j] = new Tile(j * TILEWIDTH, i * TILEHEIGHT, TILEWIDTH, TILEHEIGHT, TileType.CoopTile);
                 else if ((Common.gamemap.get(i)).get(j).showSymbol() == '*') {
                     map[i][j] = new Tile(j * TILEWIDTH, i * TILEHEIGHT, TILEWIDTH, TILEHEIGHT, TileType.CoopTile);
-                    Boot.objectList.add(new Object(quickLoad("grass"), map[i][j], OBJECTWIDTH, OBJECTHEIGHT));
+                    Boot.objectList.add(new Object(quickLoad("coopgrass"), map[i][j], OBJECTWIDTH, OBJECTHEIGHT));
                 }
                 else
                     map[i][j] = new Tile(j*TILEWIDTH, i*TILEHEIGHT, TILEWIDTH,TILEHEIGHT, TileType.GrassTile);
