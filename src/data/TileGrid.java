@@ -14,13 +14,9 @@ public class TileGrid {
     public Tile[][] map;
 
     public TileGrid(){
-<<<<<<< HEAD
         //pay attention: map here is constructed with reversed i & j from Common.gamemap!
         map = new Tile[XSIZE][YSIZE];
         //System.out.println(Common.gamemap.size() + " >>> " + Common.gamemap.get(0).size());
-=======
-        map = new Tile[Common.gamemap.size()][Common.gamemap.get(0).size()];
->>>>>>> d8a091fefb107f3a2560273eea5d8c9a45363a70
 
         /**
          * Loop to add land and grass

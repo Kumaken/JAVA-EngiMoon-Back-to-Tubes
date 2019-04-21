@@ -10,6 +10,7 @@ package data;
     import static helpers.Artist.*;
 
     //import texture:
+    import org.newdawn.slick.Color;
     import org.newdawn.slick.TrueTypeFont;
 
     //keyboard control:
