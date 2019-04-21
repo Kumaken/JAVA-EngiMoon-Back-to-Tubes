@@ -11,6 +11,7 @@ import common.Common;
 @SuppressWarnings("unchecked")
 public class Player{
     private static final int MAX_WATER = 10;
+    private static final int LENBACKPACK =6;
 
     private final ArrayList<Character> EGGPRODUCINGANIMAL = new ArrayList<Character>(Arrays.asList(new Character[]{'C','D'}));
     private final ArrayList<Character> MILKPRODUCINGANIMAL = new ArrayList<Character>(Arrays.asList(new Character[]{'S','G'}));
@@ -74,20 +75,25 @@ public class Player{
         if (cell.getOverrideSymbol() != '\0'){
             int idxMilkProducing = MILKPRODUCINGANIMAL.indexOf(Character.toUpperCase(cell.getOverrideSymbol()));
             int idxEggProducing = EGGPRODUCINGANIMAL.indexOf(Character.toUpperCase(cell.getOverrideSymbol()));
-    
+
             if (Character.isUpperCase(cell.getOverrideSymbol())){
-                if (idxMilkProducing != -1){
-                    backpack.add(cell.getAnimalRef().produceMilk());
-                }
-                if (idxEggProducing != -1){
-                    backpack.add(cell.getAnimalRef().produceEgg());
-    
-                }
-                if (idxMilkProducing != -1 || idxEggProducing != -1){
+                if ((idxMilkProducing != -1 || idxEggProducing != -1) && backpack.size()<LENBACKPACK){
                     cell.getAnimalRef().revLapar();
                     cell.animalOccupy(cell.getAnimalRef());
                     System.out.println("Product is produced");
+                }else if (backpack.size()>=LENBACKPACK){
+                    System.out.println("Limited backpack !!");
+                }else{
+                    System.out.println("Not a producing animal !!");
                 }
+
+                if (idxMilkProducing != -1 && backpack.size()<LENBACKPACK){
+                    backpack.add(cell.getAnimalRef().produceMilk());
+                }
+                if (idxEggProducing != -1 && backpack.size()<LENBACKPACK){
+                    backpack.add(cell.getAnimalRef().produceEgg());
+                }
+
     
             }else{
                 System.out.println("Animal's hungry");
@@ -140,7 +146,11 @@ public class Player{
         if (tcol < 0 || tcol >= Common.gamemap.get(0).size() || trow < 0 || trow >= Common.gamemap.size()) return;
 
         if (cell.getOverrideSymbol() != '\0'){
-            backpack.add(cell.getAnimalRef().produceMeat());
+            if (backpack.size()>=LENBACKPACK){
+                backpack.add(cell.getAnimalRef().produceMeat());
+            }else{
+                System.out.println("Limited Backpack !!");
+            }
             System.out.println(cell.getAnimalRef().sound());
             cell.makeUnoccupied();
             System.out.println("Animal's killed");
