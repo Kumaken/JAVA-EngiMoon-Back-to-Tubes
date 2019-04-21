@@ -8,7 +8,9 @@ import product.sideproduct.HorseRolade;
 import product.sideproduct.MixedCheese;
 import common.Common;
 
-@SuppressWarnings("unchecked")
+/**
+ * Class for player
+ */
 public class Player{
     private static final int MAX_WATER = 10;
     private static final int LENBACKPACK =6;
@@ -25,11 +27,19 @@ public class Player{
     private int row,col,score,pouch;
     private LinkedList<Product> backpack;
 
+    /**
+     * Construct Player without parameter
+     */
     public Player(){
         row = col = score = 0; pouch = 10;
         backpack = new LinkedList<Product>();
     }
 
+    /**
+     * Construct player with paramenter baris dan kolom posisi awak
+     * @param _row
+     * @param _col
+     */
     public Player(int _row, int _col){
         row = _row; col = _col; score = 0; pouch = 10;
         backpack = new LinkedList<Product>();
@@ -45,6 +55,10 @@ public class Player{
     public void setPouch(int _pouch){ pouch = _pouch; }
     public void setScore(int _score){ score = _score; }
 
+    /**
+     * menerima parameter berupa arah dan executable jika sekitar player merupakan hewan
+     * @param dir
+     */
     public void talk(char dir){
         ArrayList<java.lang.Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
@@ -62,6 +76,10 @@ public class Player{
 
     }
 
+    /**
+     * Menerima parameter berupa arah dan executable jika sekitar player merupakan hewan ataupun facility
+     * @param dir
+     */
     public void interact(char dir){
         ArrayList<java.lang.Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
@@ -136,6 +154,10 @@ public class Player{
         }
     }
 
+    /**
+     * menerima parameter arah dimana hewan berada dan akan menambahkan product of meat dari hewan yang di-kill
+     * @param dir
+     */
     public void kill(char dir){
         ArrayList<java.lang.Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
@@ -159,6 +181,9 @@ public class Player{
         }
     }
 
+    /**
+     * Land dimana player berada akan diganti ke simbol rumput dan pouch dari player akan berkurang satu
+     */
     public void grow(){ //on the spot
         if (pouch>0){
             Common.gamemap.get(row).get(col).growGrass();
@@ -169,6 +194,11 @@ public class Player{
         }
     }
 
+    /**
+     * mencari menu yang cocok dari daftar dan akan memeriksa apakah backpack mengandung semua bahan tersebut dan akan melakukan delete inventory apabila sesuai
+     * @param dir
+     * @param menu
+     */
     public void mix(char dir, String menu){
         ArrayList<java.lang.Object> list = getPositionInteract(dir);
         Cell cell = (Cell) list.get(0);
@@ -235,6 +265,11 @@ public class Player{
 
     }
 
+    /**
+     * Mengembalikan cell yang di-interact dengan arah yang sesuai di parameter
+     * @param dir
+     * @return
+     */
     public ArrayList<java.lang.Object> getPositionInteract(char dir){ // return Cell, rowt, colt
         dir = Character.toLowerCase(dir);
         int colt = 0, rowt = 0; //position of the cell that will be interacted
@@ -258,6 +293,12 @@ public class Player{
         }
     }
 
+    /**
+     * Memeriksa apakah player dapat melalui cell sesuai posisi baris trow dan kolom tcol
+     * @param trow
+     * @param tcol
+     * @return
+     */
     public boolean canPass(int trow, int tcol){
         char overrideSymbol = Common.gamemap.get(trow).get(tcol).getOverrideSymbol();
         char baseSymbol = Character.toUpperCase(Common.gamemap.get(trow).get(tcol).showSymbol());
@@ -267,6 +308,10 @@ public class Player{
                 baseSymbol != 'W');
     }
 
+    /**
+     * Melakukan pergerakan player ke arah dari parameter
+     * @param dir
+     */
     public void move(char dir){ //move toward dir direction
         dir = Character.toLowerCase(dir);
 
@@ -284,6 +329,10 @@ public class Player{
         }
     }
 
+    /**
+     * Melakukan print dari semua inventories di backpack
+     * @return array of string of all products in backpack
+     */
     public String[] printBackpack(){
         Iterator<Product> itr = backpack.iterator();
         String[] temp = new String[]{"","","","","",""};

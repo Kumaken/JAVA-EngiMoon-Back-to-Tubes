@@ -13,9 +13,15 @@ import org.newdawn.slick.util.ResourceLoader;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Class for rendering the GUI
+ */
 public class Artist {
     public static final int WIDTH = 1366, HEIGHT = 960;
 
+    /**
+     * Method to initialize OpenGL
+     */
     public static void beginSession(){
             //setup screen:
             Display.setTitle("Java moon");
@@ -36,7 +42,14 @@ public class Artist {
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
 
-    //methods:
+    /**
+     * Method to draw the texture of objects on map
+     * @param tex
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
     public static void drawQuadTexture(Texture tex, float x, float y, float width, float height){
         tex.bind();
         glTranslatef(x, y, 0);
@@ -54,6 +67,12 @@ public class Artist {
         glLoadIdentity();
     }
 
+    /**
+     * Method to load the texture for objects on map
+     * @param path of file
+     * @param filetype
+     * @return
+     */
     public static Texture loadTexture(String path, String filetype){
         Texture tex = null;
         InputStream in = ResourceLoader.getResourceAsStream(path);
@@ -65,6 +84,11 @@ public class Artist {
         return tex;
     }
 
+    /**
+     * Method to return texture of objects on map
+     * @param name
+     * @return texture of object png file
+     */
     public static Texture quickLoad (String name){
         Texture tex = null;
         tex = loadTexture("res/" + name + ".png", "PNG" );

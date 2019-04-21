@@ -1,6 +1,10 @@
 package cells.facilities;
 import cells.Cell;
 //Mixer Class: A facility for mixing and creating various side-products for profit
+
+/**
+ * Class for mixer
+ */
 public class Mixer extends Cell implements Facility{
     //Constructor implementation:
     public Mixer(){

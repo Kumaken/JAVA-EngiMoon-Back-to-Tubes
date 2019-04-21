@@ -2,6 +2,10 @@ package cells.facilities;
 import cells.Cell;
 
 //Truck Class: A facility for shipping various products from player's farm
+
+/**
+ * Class for truck
+ */
 public class Truck extends Cell implements Facility{
     //Constructor implementation:
     public Truck(){

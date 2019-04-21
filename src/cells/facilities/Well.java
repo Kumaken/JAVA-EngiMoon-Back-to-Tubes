@@ -2,6 +2,10 @@ package cells.facilities;
 import cells.Cell;
 
 //Well Class: A facility that supplies water for player's farm
+
+/**
+ * Class for well
+ */
 public class Well extends Cell implements Facility{   
     //Constructor implementation:
     public Well(){
