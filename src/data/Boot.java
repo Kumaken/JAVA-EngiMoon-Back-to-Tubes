@@ -32,6 +32,8 @@ public class Boot {
     public static Player mainPlayer = new Player(4,3);
     public static Common com;
     public static int tick;
+    public static String playerPic = "playerM";
+    public static String playerName = "MoonBoy";
     //STDOUT CHECK:
     private final static ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 //    private final static ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -62,7 +64,11 @@ public class Boot {
          */
         TrueTypeFont font = null;
         Font awtFont = new Font("Times New Roman", Font.BOLD, 20);
+        Font awtFont2 = new Font("Times New Roman", Font.BOLD, 14);
+        Font awtFont3 = new Font("Calibri", Font.BOLD, 34);
         font = new TrueTypeFont(awtFont, false);
+        TrueTypeFont font2 = new TrueTypeFont(awtFont2, false);
+        TrueTypeFont font3 = new TrueTypeFont(awtFont3, false);
 
         String[] inventory_content;
         int pass = 0;
@@ -72,29 +78,42 @@ public class Boot {
          */
         while(!Display.isCloseRequested()){ //while not prompted to close
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            font.drawString(50, 700, "CONTROLS");
-            font.drawString(50, 730, "Move     = w/a/s/d");
-            font.drawString(50, 755, "Grow     = g");
-            font.drawString(50, 780, "Talk       = t + <arrow_key>");
-            font.drawString(50, 805, "Kill         = k + <arrow_key>");
-            font.drawString(50, 830, "Interact = i + <arrow_key>");
-            font.drawString(50, 855, "Mix        = m + <arrow_key> + <recipe_code>");
-            font.drawString(50, 880, "Exit        = ESC_KEY");
-            font.drawString(450, 700, "RECIPE CODE");
-            font.drawString(450, 730, "Mixed Cheese    = 0");
-            font.drawString(450, 755, "(Cow Milk + Goat Milk)");
-            font.drawString(450, 785, "Horse Rolade     = 1");
-            font.drawString(450, 810, "(Horse Meat + Duck Egg)");
-            font.drawString(450, 840, "Bacon Omelette = 2");
-            font.drawString(450, 865, "(Pig Meat + Chicken Egg)");
+            font3.drawString(47, 690, "CONTROLS", Color.yellow);
+            font2.drawString(50, 730, "Move     = w/a/s/d", Color.orange);
+            font2.drawString(50, 755, "Grow     = g", Color.orange );
+            font2.drawString(50, 780, "Talk       = t + <arrow_key>",Color.orange);
+            font2.drawString(50, 805, "Kill         = k + <arrow_key>",Color.orange);
+            font2.drawString(50, 830, "Interact = i + <arrow_key>",Color.orange);
+            font2.drawString(50, 855, "Mix        = m + <arrow_key> + <recipe_code>",Color.orange);
+            font2.drawString(50, 880, "Exit        = ESC_KEY",Color.orange);
+            font3.drawString(345, 690, "RECIPE CODE", Color.green);
+            font2.drawString(350, 730, "Mixed Cheese    = 0", Color.cyan);
+            font2.drawString(350, 755, "(Cow Milk + Goat Milk)", Color.cyan);
+            font2.drawString(350, 785, "Horse Rolade     = 1", Color.cyan);
+            font2.drawString(350, 810, "(Horse Meat + Duck Egg)", Color.cyan);
+            font2.drawString(350, 840, "Bacon Omelette = 2", Color.cyan);
+            font2.drawString(350, 865, "(Pig Meat + Chicken Egg)", Color.cyan);
+
             inventory_content = mainPlayer.printBackpack();
-            font.drawString(700, 700, "INVENTORY:");
-            font.drawString(700, 730, "1. " + inventory_content[0]);
-            font.drawString(700, 755, "2. " + inventory_content[1]);
-            font.drawString(700, 780, "3. " + inventory_content[2]);
-            font.drawString(700, 805, "4. " + inventory_content[3]);
-            font.drawString(700, 830, "5. " + inventory_content[4]);
-            font.drawString(700, 855, "6. " + inventory_content[5]);
+            int ystep = 25;
+            font3.drawString(560, 690, "INVENTORY:");
+            for(int i=0; i<6; ++i){
+                font2.drawString(560, 730+(ystep*i), (i+1)+". " + inventory_content[i]);
+                if(inventory_content[i] != "") {
+                    if (inventory_content[i] == "MixedCheese")
+                        drawQuadTexture(quickLoad("mixedcheese"), 700, 730+(ystep*i), 30, 25);
+                    else if (inventory_content[i] == "BaconOmelette")
+                        drawQuadTexture(quickLoad("baconomelette"), 700, 730+(ystep*i), 30, 25);
+                    else if (inventory_content[i] == "HorseRolade")
+                        drawQuadTexture(quickLoad("horserolade"), 700, 730+(ystep*i), 30, 25);
+                }
+            }
+
+            /*
+            if (inventory_content[0] != ""){
+                drawQuadTexture(quickLoad("MixedCheese"), 600, 730, 50, 50);
+            }*/
+
             font.drawString(900, 700, "OUTPUT:");
 
             if(outContent.toString().contains("Animal's killed")){
@@ -113,6 +132,30 @@ public class Boot {
                 font.drawString(900, 730, outContent.toString());
             }
             font.drawString(1150, 700, "TICK         =  " + tick);
+<<<<<<< HEAD
+            font.drawString(1150, 730, "MONEY    =  " + mainPlayer.getScore(), Color.yellow);
+            font.drawString(1150, 760, "WATER    =  " + mainPlayer.getPouch(), Color.blue);
+            font.drawString(1150, 900, "");
+            drawQuadTexture(quickLoad(playerPic), 1150, 790, 150, 150);
+            font.drawString(1150, 900, playerName);
+            if((tick % 20) > 10){
+                font.drawString(1150, 760, "", Color.blue); // set to malam
+            }
+            if (Keyboard.next() && Keyboard.getEventKeyState()) {
+                outContent.reset();
+                setUpStreams();
+                //CHANGE PLAYER PIC:
+                if (Keyboard.isKeyDown(Keyboard.KEY_P)) {
+                    if (playerPic == "playerM") {
+                        playerPic = "playerF";
+                        playerName = "MoonGurl";
+                    }
+                    else{
+                        playerPic = "playerM";
+                        playerName = "MoonBoy";
+                    }
+                }
+=======
             font.drawString(1150, 730, "MONEY    =  " + mainPlayer.getScore());
             font.drawString(1150, 760, "WATER    =  " + mainPlayer.getPouch());
 
@@ -123,6 +166,7 @@ public class Boot {
                 outContent.reset(); //Reset the STDOUT listener
                 setUpStreams(); //Listen for STDOUT
 
+>>>>>>> 399111bd79e97513f796578fd4716fd5e4831b63
                 //MIX KEY:
                 if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_0) && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
                     mainPlayer.mix('w', "MixedCheese");
